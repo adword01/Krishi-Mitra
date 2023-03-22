@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -47,6 +48,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.databinding:databinding-runtime:7.4.2'
+    implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
 
 
     //Lottie
@@ -64,7 +66,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    kapt 'com.android.databinding:compiler:3.1.4'
+  //  kapt 'com.android.databinding:compiler:3.1.4'
 
 
 }

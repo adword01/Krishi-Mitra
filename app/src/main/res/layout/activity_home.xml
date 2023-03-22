@@ -4,11 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/profilebg"
     tools:context=".HomeActivity">
 
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
     </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/navfram"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+
+
+    <LinearLayout
+        android:gravity="bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:elevation="5dp"
+        android:background="@drawable/round_corners"
+        app:itemRippleColor="@android:color/transparent"
+        app:itemIconSize="25dp"
+        app:menu="@menu/menu_list" />
+    </LinearLayout>
+
 </LinearLayout>
