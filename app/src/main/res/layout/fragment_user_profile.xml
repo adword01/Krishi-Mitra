@@ -161,7 +161,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:fontFamily="@font/allan_bold"
+
             android:gravity="center_vertical"
             android:text="LOG OUT"
             android:textColor="#E30E0E"
