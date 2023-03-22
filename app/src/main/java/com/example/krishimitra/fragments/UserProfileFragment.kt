@@ -11,6 +11,7 @@ import com.example.krishimitra.EditProfileActivity
 import com.example.krishimitra.R
 import com.example.krishimitra.databinding.FragmentGreetBinding
 import com.example.krishimitra.databinding.FragmentUserProfileBinding
+import com.google.firebase.database.FirebaseDatabase
 
 class UserProfileFragment : Fragment() {
 
@@ -27,11 +28,26 @@ class UserProfileFragment : Fragment() {
         // Inflate the layout for this fragment
        // return inflater.inflate(R.layout.fragment_user_profile, container, false)
 
+
+        getData()
         binding.editprofilebtn.setOnClickListener {
            val intent = Intent(activity,EditProfileActivity::class.java)
             startActivity(intent)
         }
         return binding.root
+    }
+
+    private fun getData() {
+        val db = FirebaseDatabase.getInstance().reference
+
+        db.child("User").get().addOnSuccessListener {
+            if(it.exists()){
+                binding.Nametxt.text = it.child("name").value.toString()
+                binding.emailtxt.text = it.child("email").value.toString()
+                binding.phonetxt.text = it.child("mobileNumber").value.toString()
+                binding.addresstxt.text = it.child("location").value.toString()
+            }
+        }
     }
 
 

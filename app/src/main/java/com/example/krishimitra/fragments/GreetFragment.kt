@@ -39,10 +39,7 @@ class GreetFragment : Fragment() {
         }
 
         //    return inflater.inflate(R.layout.fragment_greet, container, false)
-
         return binding.root
-
-
     }
 
 

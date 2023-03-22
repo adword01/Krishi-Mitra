@@ -136,15 +136,16 @@
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
-
-
     <Button
         android:id="@+id/editprofilebtn"
         android:text="Edit Profile"
-        android:layout_margin="20dp"
-        android:layout_gravity="bottom"
+        android:layout_marginTop="500dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="60dp"/>
+
+
 
     <LinearLayout
         android:id="@+id/logoutbtn"
