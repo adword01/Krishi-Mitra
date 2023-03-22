@@ -112,7 +112,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/verify_txt" />
 
-
+    <Button
+        android:id="@+id/signIn"
+        android:layout_margin="20dp"
+        android:text="Sign IN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

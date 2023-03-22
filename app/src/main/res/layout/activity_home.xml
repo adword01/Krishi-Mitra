@@ -14,6 +14,20 @@
         android:layout_height="match_parent">
     </FrameLayout>
 
+    <TextView
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:id="@+id/textName"
+        android:text="Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginTop="150dp"
+        android:gravity="center"
+        android:id="@+id/textEmail"
+        android:text="Email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <include
         android:id="@+id/bottom_nav"
         layout="@layout/bottom_nav_bar"
