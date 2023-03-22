@@ -9,8 +9,12 @@
         android:title="Seller Zone"
         android:icon="@drawable/sell"/>
 
+    <item android:id="@+id/recommend"
+        android:title="Recommendation"
+        android:icon="@drawable/recommend"/>
+
     <item android:id="@+id/status"
-        android:title="Current Status"
+        android:title="Status"
         android:icon="@drawable/status"/>
 
     <item android:id="@+id/usrprofile"

@@ -10,7 +10,7 @@
     android:background="@drawable/round_corners"
     android:elevation="5dp"
     app:itemIconSize="25dp"
-    app:itemTextColor="#7ae2d1"
+    app:itemTextColor="#6e9d69"
     app:itemIconTint="#5D9C59"
     app:itemRippleColor="@android:color/transparent"
     app:menu="@menu/menu_list" />

@@ -49,6 +49,10 @@ class HomeActivity : AppCompatActivity() {
                 R.id.status -> {
                     Toast.makeText(this@HomeActivity,"Status selected",Toast.LENGTH_SHORT).show()
                 }
+
+                R.id.recommend -> {
+                    Toast.makeText(this@HomeActivity,"Recommendation",Toast.LENGTH_SHORT).show()
+                }
                 R.id.usrprofile ->{
                     loadFragment(UserProfileFragment())
 //                    true
