@@ -7,8 +7,15 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:id="@+id/greettext"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:fontFamily="@font/alatsi"
+        android:text="Greet Text"
+        android:textSize="40sp"
+        android:textStyle="bold" />
 
 </FrameLayout>
