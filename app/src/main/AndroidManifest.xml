@@ -12,6 +12,9 @@
         android:theme="@style/Theme.KrishiMitra"
         tools:targetApi="31">
         <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
