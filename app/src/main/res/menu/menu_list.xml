@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/Home"
+        android:title="Home"
+        android:icon="@drawable/home"/>
+
+    <item android:id="@+id/sale"
+        android:title="Seller Zone"
+        android:icon="@drawable/sell"/>
+
+    <item android:id="@+id/status"
+        android:title="Current Status"
+        android:icon="@drawable/status"/>
+
+    <item android:id="@+id/usrprofile"
+        android:title="User profile"
+        android:icon="@drawable/person"/>
+</menu>
