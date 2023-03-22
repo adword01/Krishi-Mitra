@@ -79,6 +79,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
+    //what is this going on
     private fun signIn() {
         val signInIntent = gsc.signInIntent
         startActivityForResult(signInIntent, 1000)
