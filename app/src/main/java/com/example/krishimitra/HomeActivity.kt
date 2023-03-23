@@ -15,7 +15,8 @@ import com.google.firebase.auth.FirebaseAuth
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding : ActivityHomeBinding
     lateinit var bottomNav : BottomNavigationView
-    private lateinit var auth : FirebaseAuth
+
+  private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +29,8 @@ class HomeActivity : AppCompatActivity() {
         val email = intent.getStringExtra("email")
         val displayName = intent.getStringExtra("name")
 
-        binding.textEmail.text = email
-        binding.textName.text = displayName
+//        binding.textEmail.text = email
+//        binding.textName.text = displayName
         setUpNavigationview()
     }
     private fun loadFragment(fragment: Fragment) {
