@@ -117,9 +117,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawablePadding="8dp"
+            android:textIsSelectable="true"
             android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+
 
     </LinearLayout>
 
