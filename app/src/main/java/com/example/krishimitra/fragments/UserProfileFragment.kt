@@ -48,7 +48,6 @@ class UserProfileFragment : Fragment() {
         authnumber = auth.currentUser!!.phoneNumber.toString()
         phoneNumberWithoutCountryCode = authnumber?.replace("^\\+\\d{1,2}".toRegex(), "").toString()
 
-        Toast.makeText(activity,phoneNumberWithoutCountryCode,Toast.LENGTH_SHORT).show()
 
         if(auth.currentUser!!.email != null){
             EmailData()
