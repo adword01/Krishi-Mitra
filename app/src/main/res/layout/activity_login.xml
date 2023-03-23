@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#ffffff"
+    android:background="#e5f2e5"
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
@@ -59,7 +59,8 @@
                 android:id="@+id/phoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColorHint="#609966"
+                android:background="#FFFDFD"
+                android:textColorHint="#EBF3EB"
                 android:hint="Phone Number"
                 android:textColor="@color/black"
                 android:inputType="phone" />
