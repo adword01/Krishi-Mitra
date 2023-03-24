@@ -18,6 +18,6 @@
         android:icon="@drawable/status"/>
 
     <item android:id="@+id/usrprofile"
-        android:title="User profile"
+        android:title="Profile"
         android:icon="@drawable/person"/>
 </menu>

@@ -7,15 +7,25 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
         android:id="@+id/greettext"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fontFamily="@font/alatsi"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/alata"
         android:text="Greet Text"
-        android:textSize="40sp"
+        android:textSize="45sp"
         android:textStyle="bold" />
+
+    <TextView
+        android:textSize="20dp"
+        android:textColor="#FAF4F4"
+        android:id="@+id/username"
+        android:layout_marginTop="80dp"
+        android:text="Name"
+        android:fontFamily="@font/actor"
+        android:paddingStart="23dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </FrameLayout>

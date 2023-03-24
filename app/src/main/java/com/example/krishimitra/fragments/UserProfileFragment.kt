@@ -16,11 +16,14 @@ import com.example.krishimitra.R
 import com.example.krishimitra.databinding.FragmentGreetBinding
 import com.example.krishimitra.databinding.FragmentUserProfileBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
+import kotlin.concurrent.fixedRateTimer
 
 class UserProfileFragment : Fragment() {
 
@@ -32,6 +35,7 @@ class UserProfileFragment : Fragment() {
     private lateinit var authEmail : String
     private lateinit var authnumber : String
     private lateinit var phoneNumberWithoutCountryCode : String
+    private lateinit var googleSignInClient: GoogleSignInClient
 
 
     override fun onCreateView(
@@ -42,6 +46,17 @@ class UserProfileFragment : Fragment() {
 
         binding = FragmentUserProfileBinding.inflate(inflater,container,false)
 
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+        val account = GoogleSignIn.getLastSignedInAccount(requireActivity())
+
+        if (account?.photoUrl != null) {
+            Picasso.get()
+                .load(account.photoUrl)
+                .into(binding.profileImage)
+        }
         auth = FirebaseAuth.getInstance()
         authName = auth.currentUser!!.displayName.toString()
         authEmail = auth.currentUser!!.email.toString()
@@ -51,6 +66,8 @@ class UserProfileFragment : Fragment() {
 
         if(auth.currentUser!!.email != null){
             EmailData()
+            binding.profileName.text = authName
+            binding.mobNumber.text =  authEmail
         }else{
             phoneData()
         }
@@ -92,8 +109,6 @@ class UserProfileFragment : Fragment() {
                     binding.emailtxt.text = email
                     binding.phonetxt.text = mobNumber
                     binding.addresstxt.text = location
-                    binding.profileName.text = authName
-                    binding.mobNumber.text =  authEmail
 
                     Log.d(TAG, "Email: $email")
                 } else {
@@ -103,7 +118,6 @@ class UserProfileFragment : Fragment() {
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting document", exception)
             }
-
     }
     private fun phoneData(){
         val db = Firebase.firestore
