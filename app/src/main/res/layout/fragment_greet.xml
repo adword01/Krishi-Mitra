@@ -32,11 +32,23 @@
 
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/username"
+            android:fontFamily="@font/actor"
+            android:hint="USernmae"
+            android:layout_marginStart="23dp"
+            android:textSize="20sp"
+            />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
 
             android:background="#000000"/>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,7 +67,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center|end"
                 android:id="@+id/add_to_do"
-                android:src="@drawable/add"
+
                 android:layout_marginStart="145dp"
                 />
         </LinearLayout>
