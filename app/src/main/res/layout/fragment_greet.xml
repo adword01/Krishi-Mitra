@@ -3,29 +3,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.GreetFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/greettext"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/alata"
-        android:text="Greet Text"
-        android:textSize="45sp"
-        android:textStyle="bold" />
+        android:orientation="vertical">
 
-    <TextView
-        android:textSize="20dp"
-        android:textColor="#FAF4F4"
-        android:id="@+id/username"
-        android:layout_marginTop="80dp"
-        android:text="Name"
-        android:fontFamily="@font/actor"
-        android:paddingStart="23dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_margin="20dp"
+                android:id="@+id/greettext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Greet Text"
+                android:textSize="40sp"
+                android:textStyle="bold" />
 
+            <ImageView
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_margin="10dp"
+                android:id="@+id/greet_iv"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+
+            android:background="#000000"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="To-Do-List"
+                android:textSize="36sp"
+                android:layout_margin="10dp"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center|end"
+                android:id="@+id/add_to_do"
+                android:src="@drawable/add"
+                android:layout_marginStart="145dp"
+                />
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="10dp"
+            app:cardElevation="30dp"
+            app:cardBackgroundColor="#9DC08B"
+            app:cardCornerRadius="20dp"
+            android:outlineAmbientShadowColor="#609966"
+            android:outlineSpotShadowColor="#609966"
+            >
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 </FrameLayout>
