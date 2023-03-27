@@ -1,14 +1,15 @@
 package com.example.krishimitra.fragments
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import com.example.krishimitra.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.krishimitra.databinding.FragmentGreetBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -39,6 +40,9 @@ class GreetFragment : Fragment() {
 //        val inputData = args?.get("name")
 //        binding.profileName.text = inputData.toString()
 //
+
+
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
@@ -79,6 +83,8 @@ class GreetFragment : Fragment() {
         //    return inflater.inflate(R.layout.fragment_greet, container, false)
         return binding.root
     }
+
+
 
     private fun phoneData(){
         val db = Firebase.firestore
