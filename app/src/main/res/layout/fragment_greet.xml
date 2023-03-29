@@ -76,6 +76,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center|end"
                 android:id="@+id/add_to_do"
+                android:src="@drawable/baseline_add_box_24"
                 android:clickable="true"
                 android:layout_marginStart="145dp"
                 android:focusable="true" />
