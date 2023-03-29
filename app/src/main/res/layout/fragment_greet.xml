@@ -30,6 +30,15 @@
                 android:layout_margin="10dp"
                 android:id="@+id/greet_iv"/>
 
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="20dp"
+                android:layout_gravity="end|center"
+                android:id="@+id/map_iv"
+                android:src="@drawable/map"/>
+
+
         </LinearLayout>
 
         <TextView

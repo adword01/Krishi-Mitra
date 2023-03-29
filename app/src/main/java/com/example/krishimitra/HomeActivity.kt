@@ -45,10 +45,10 @@ class HomeActivity : AppCompatActivity() {
         bottomNav.setOnItemSelectedListener{
             when(it.itemId){
                 R.id.Home -> {
-//                    loadFragment(GreetFragment())
-                    val intent = Intent(this, MapActivity::class.java)
-                    startActivity(intent)
-                finish()
+                    loadFragment(GreetFragment())
+//                    val intent = Intent(this, MapActivity::class.java)
+//                    startActivity(intent)
+//                finish()
                 }
 
                 R.id.sale -> {

@@ -10,6 +10,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.krishimitra.EditProfileActivity
+import com.example.krishimitra.MapActivity
+import com.example.krishimitra.R
 import com.example.krishimitra.databinding.FragmentGreetBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -41,6 +44,11 @@ class GreetFragment : Fragment() {
 //        binding.profileName.text = inputData.toString()
 //
 
+        binding.mapIv.setOnClickListener {
+            val intent = Intent(activity, MapActivity::class.java)
+            startActivity(intent)
+        }
+
 
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -68,15 +76,22 @@ class GreetFragment : Fragment() {
         when(cal.get(Calendar.HOUR_OF_DAY)){
             in 0..12 ->{
                 binding.greettext.text = "Good Morning!!"
+                binding.greetIv.setImageResource(R.drawable.morning)
             }
             in 12..17 ->{
                 binding.greettext.text = "Good Afternoon!!"
+                binding.greetIv.setImageResource(R.drawable.noon)
+
             }
             in 17..21 ->{
                 binding.greettext.text = "Good evening!!"
+                binding.greetIv.setImageResource(R.drawable.evening)
+
             }
             else -> {
                 binding.greettext.text = "Good Night!!"
+                binding.greetIv.setImageResource(R.drawable.night)
+
             }
         }
 
