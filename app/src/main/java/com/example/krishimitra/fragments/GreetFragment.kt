@@ -78,12 +78,12 @@ class GreetFragment : Fragment() {
                 binding.greettext.text = "Good Morning!!"
                 binding.greetIv.setImageResource(R.drawable.morning)
             }
-            in 12..17 ->{
+            in 12..15 ->{
                 binding.greettext.text = "Good Afternoon!!"
                 binding.greetIv.setImageResource(R.drawable.noon)
 
             }
-            in 17..21 ->{
+            in 15..21 ->{
                 binding.greettext.text = "Good evening!!"
                 binding.greetIv.setImageResource(R.drawable.evening)
 
