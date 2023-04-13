@@ -20,4 +20,9 @@
     <item android:id="@+id/usrprofile"
         android:title="Profile"
         android:icon="@drawable/person"/>
+
+<!--    <item android:id="@+id/addtsk"-->
+<!--        android:title="Add Task"-->
+<!--        android:icon="@drawable/add"/>-->
+
 </menu>

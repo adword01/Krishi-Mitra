@@ -1,10 +1,9 @@
 package com.example.krishimitra
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.krishimitra.databinding.ActivityHomeBinding
 import com.example.krishimitra.fragments.GreetFragment
@@ -12,11 +11,12 @@ import com.example.krishimitra.fragments.UserProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(){
     private lateinit var binding : ActivityHomeBinding
     lateinit var bottomNav : BottomNavigationView
-
   private lateinit var auth: FirebaseAuth
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,26 +32,30 @@ class HomeActivity : AppCompatActivity() {
 //        binding.textEmail.text = email
 //        binding.textName.text = displayName
         setUpNavigationview()
+      //  setRecyclerView()
     }
     private fun loadFragment(fragment: Fragment) {
-
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container,fragment)
         transaction.commit()
     }
+
+
 
     private fun setUpNavigationview() {
        bottomNav=findViewById(R.id.bottom_nav) as BottomNavigationView
         bottomNav.setOnItemSelectedListener{
             when(it.itemId){
                 R.id.Home -> {
-                    loadFragment(GreetFragment())
-//                    val intent = Intent(this, MapActivity::class.java)
-//                    startActivity(intent)
-//                finish()
+//                    loadFragment(GreetFragment())
+                    val intent = Intent(this, MapActivity::class.java)
+                    startActivity(intent)
+                     finish()
                 }
 
                 R.id.sale -> {
+                    val intent = Intent(this,MainActivity::class.java)
+                    startActivity(intent)
                   Toast.makeText(this@HomeActivity,"Sale selected",Toast.LENGTH_SHORT).show()
                 }
 
@@ -60,7 +64,9 @@ class HomeActivity : AppCompatActivity() {
                 }
 
                 R.id.recommend -> {
-                    Toast.makeText(this@HomeActivity,"Recommendation",Toast.LENGTH_SHORT).show()
+                //    Toast.makeText(this@HomeActivity,"Recommendation",Toast.LENGTH_SHORT).show()
+                  //  loadFragment(NewTaskSheet(null))
+
                 }
                 R.id.usrprofile ->{
                     loadFragment(UserProfileFragment())
@@ -73,9 +79,13 @@ class HomeActivity : AppCompatActivity() {
 //                    transaction.add(R.id.profileFragment, myFragment)
 //                    transaction.commit()
                 }
+
             }
 
             true
         }
     }
+
+
+
 }

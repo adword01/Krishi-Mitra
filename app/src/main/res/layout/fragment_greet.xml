@@ -21,23 +21,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Greet Text"
-                android:textSize="24sp"
+                android:textSize="40sp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_margin="10dp"
                 android:id="@+id/greet_iv"/>
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="20dp"
-                android:layout_gravity="end|center"
-                android:id="@+id/map_iv"
-                android:src="@drawable/map"/>
-
 
         </LinearLayout>
 
@@ -54,7 +45,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-
             android:background="#000000"/>
 
 
@@ -76,24 +66,30 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center|end"
                 android:id="@+id/add_to_do"
-                android:src="@drawable/baseline_add_box_24"
                 android:clickable="true"
+                android:background="@drawable/add"
                 android:layout_marginStart="145dp"
                 android:focusable="true" />
         </LinearLayout>
 
 
-        <androidx.cardview.widget.CardView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_margin="10dp"
-            app:cardElevation="30dp"
-            app:cardBackgroundColor="#9DC08B"
-            app:cardCornerRadius="20dp"
-            android:outlineAmbientShadowColor="#609966"
-            android:outlineSpotShadowColor="#609966"
-            >
+            android:layout_height="250dp"
+            android:id="@+id/todoListRecyclerView"
+            android:backgroundTint="@color/design_default_color_background"
+            />
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="200dp"-->
+<!--            android:layout_margin="10dp"-->
+<!--            app:cardElevation="30dp"-->
+<!--            app:cardBackgroundColor="#9DC08B"-->
+<!--            app:cardCornerRadius="20dp"-->
+<!--            android:outlineAmbientShadowColor="#609966"-->
+<!--            android:outlineSpotShadowColor="#609966"-->
+<!--            >-->
 
-        </androidx.cardview.widget.CardView>
+<!--        </androidx.cardview.widget.CardView>-->
     </LinearLayout>
 </FrameLayout>

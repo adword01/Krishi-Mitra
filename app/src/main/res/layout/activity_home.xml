@@ -28,6 +28,14 @@
 <!--        android:text="Email"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"/>-->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:id="@+id/todoListRecyclerView"
+        android:backgroundTint="@color/design_default_color_background"
+        />
     <include
         android:id="@+id/bottom_nav"
         layout="@layout/bottom_nav_bar"
