@@ -21,14 +21,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Greet Text"
-                android:textSize="40sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_margin="10dp"
                 android:id="@+id/greet_iv"/>
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="20dp"
+                android:layout_gravity="end|center"
+                android:id="@+id/map_iv"
+                android:src="@drawable/map"/>
 
         </LinearLayout>
 
@@ -37,7 +45,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/username"
             android:fontFamily="@font/actor"
-            android:hint="USernmae"
+            android:hint="Usernmae"
             android:layout_marginStart="23dp"
             android:textSize="20sp"
             />

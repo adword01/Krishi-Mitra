@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -42,6 +43,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var number : String
     private lateinit var authEmail : String
 
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var mProgressBar : ProgressBar
 
     companion object {
@@ -57,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        sharedPreferences = getSharedPreferences("USER_PREF", MODE_PRIVATE)
 
 
         auth = FirebaseAuth.getInstance()
@@ -208,6 +211,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Toast.makeText(this , "Authenticate Successfully" , Toast.LENGTH_SHORT).show()
+
 
                     startActivity(Intent(this , HomeActivity::class.java))
                 } else {

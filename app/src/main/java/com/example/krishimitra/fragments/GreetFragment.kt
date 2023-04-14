@@ -1,6 +1,7 @@
 package com.example.krishimitra.fragments
 
 import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.krishimitra.MapActivity
 import com.example.krishimitra.R
 import com.example.krishimitra.databinding.FragmentGreetBinding
 import com.example.krishimitra.models.TaskItem
@@ -56,7 +58,10 @@ class GreetFragment : Fragment()  {
         val view = inflater.inflate(R.layout.fragment_greet, container, false)
 
         getRecylerView()
-
+        binding.mapIv.setOnClickListener {
+            val intent = Intent(activity, MapActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.addToDo.setOnClickListener {
             val bottomSheetFragment = AddTaskBottomSheetFragment()
@@ -93,15 +98,22 @@ class GreetFragment : Fragment()  {
         when(cal.get(Calendar.HOUR_OF_DAY)){
             in 0..12 ->{
                 binding.greettext.text = "Good Morning!!"
+                binding.greetIv.setImageResource(R.drawable.morning)
             }
             in 12..17 ->{
                 binding.greettext.text = "Good Afternoon!!"
+                binding.greetIv.setImageResource(R.drawable.noon)
+
             }
             in 17..21 ->{
                 binding.greettext.text = "Good evening!!"
+                binding.greetIv.setImageResource(R.drawable.evening)
+
             }
             else -> {
                 binding.greettext.text = "Good Night!!"
+                binding.greetIv.setImageResource(R.drawable.night)
+
             }
         }
 
