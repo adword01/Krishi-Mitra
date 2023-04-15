@@ -1,7 +1,7 @@
 <h1 align="center">  KrishiMitra API</h1>
 
 
-This repository is API implementation for KRISHI MITRA-ML , predicts the suitable crop based on input data such as nitrogen (N), phosphorous (P), potassium (K) levels in soil, temperature, humidity, pH, and rainfall.
+This repository is API implementation for [KRISHI MITRA-ML](https://github.com/0xSushmanth/Krishi-Mitra-ML) , predicts the suitable crop based on input data such as nitrogen (N), phosphorous (P), potassium (K) levels in soil, temperature, humidity, pH, and rainfall.
 
 ## Getting Started
 
