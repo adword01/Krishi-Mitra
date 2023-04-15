@@ -181,6 +181,14 @@ class GreetFragment : Fragment()  {
                 val ID = key // set the key as the ID field
                 val task = TaskItem(id = ID!!, description = description, time = time, date = date)
                 key?.let {
+                    val db = Firebase.firestore
+                    val usertask = hashMapOf(
+                        "id" to ID.toString(),
+                        "description" to description,
+                        "time" to time,
+                        "date" to date
+                    )
+                    db.collection(auth.currentUser!!.email!!).document(key).set(usertask)
                     database.child("tasks").child(auth.currentUser!!.uid).child(key).setValue(task)
                 }
 
@@ -195,31 +203,27 @@ class GreetFragment : Fragment()  {
     private fun getRecylerView() {
         auth = FirebaseAuth.getInstance()
         val path = auth.currentUser!!.uid
-        val tasksRef = database.child("tasks").child(path)
 
+        val db = Firebase.firestore
+       val email = auth.currentUser!!.email.toString()
 
         // set Up recyclerview
 
-        tasksRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                 val tasks = mutableListOf<TaskItem>()
-                for (taskSnapshot in dataSnapshot.children) {
-                    val task = taskSnapshot.getValue(TaskItem::class.java)
-                    tasks.add(task!!)
+        db.collection(email).get()
+            .addOnSuccessListener { documents ->
+                val tasks = mutableListOf<TaskItem>()
+                for (document in documents) {
+                    val task = document.toObject(TaskItem::class.java)
+                    tasks.add(task)
                 }
-                val Tadapter = TaskAdapter(tasks,path)
-                binding.todoListRecyclerView.adapter = Tadapter
-                Tadapter!!.setTasks(tasks)
+                val adapter = TaskAdapter(tasks,email)
+                binding.todoListRecyclerView.adapter = adapter
                 binding.todoListRecyclerView.layoutManager = LinearLayoutManager(context)
-                Log.d("task", tasks.toString())
-                //    Toast.makeText(activity,"Not found",Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { exception ->
+                Log.w("Firestore", "Error getting documents: ", exception)
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(activity,"Not found",Toast.LENGTH_SHORT).show()
-                // Handle errors
-            }
-        })
     }
 
 

@@ -9,6 +9,7 @@ import com.example.krishimitra.databinding.ActivityHomeBinding
 import com.example.krishimitra.fragments.GreetFragment
 import com.example.krishimitra.fragments.PredictCrop
 import com.example.krishimitra.fragments.UserProfileFragment
+import com.example.krishimitra.fragments.chatbot
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -54,10 +55,7 @@ class HomeActivity : AppCompatActivity(){
         bottomNav.setOnItemSelectedListener{
             when(it.itemId){
                 R.id.Home -> {
-//                    loadFragment(GreetFragment())
-                    val intent = Intent(this, MapActivity::class.java)
-                    startActivity(intent)
-                     finish()
+                    loadFragment(GreetFragment())
                 }
 
                 R.id.sale -> {
@@ -65,6 +63,7 @@ class HomeActivity : AppCompatActivity(){
                 }
 
                 R.id.status -> {
+                    loadFragment(chatbot())
                     Toast.makeText(this@HomeActivity,"Status selected",Toast.LENGTH_SHORT).show()
                 }
 

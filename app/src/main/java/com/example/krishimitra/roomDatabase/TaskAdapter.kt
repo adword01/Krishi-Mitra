@@ -1,6 +1,8 @@
 package com.example.krishimitra.roomDatabase
 
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,82 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.krishimitra.R
 import com.example.krishimitra.models.TaskItem
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
-//class TaskAdapter(private val tasks: List<Task>) :
-//    RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
-//
-//    private lateinit var database: DatabaseReference
-//    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        private val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
-//        private val timetxt: TextView = itemView.findViewById(R.id.timetxt)
-//        private val datetxt: TextView = itemView.findViewById(R.id.datetxt)
-//        private val deleteButton: ImageView = itemView.findViewById(R.id.deleteButton)
-//
-//        fun bind(task: Task) {
-//            nameTextView.text = task.description
-//            timetxt.text = task.time
-//            datetxt.text = task.date
-//            deleteButton.setOnClickListener { //database.child("tasks").child(task.id!!).removeValue() }
-//            }
-//        }
-//    }
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-//        val view = LayoutInflater.from(parent.context)
-//            .inflate(R.layout.item_task, parent, false)
-//        return ViewHolder(view)
-//    }
-//
-//    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        val task = tasks[position]
-//        holder.bind(task)
-//    }
-//
-//    override fun getItemCount(): Int = tasks.size
-//}
-
-//class TaskAdapter : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
-//
-//    private var tasks = mutableListOf<TaskItem>()
-//    val database = FirebaseDatabase.getInstance()
-//    val tasksRef = database.getReference("tasks")
-//
-//    fun setTasks(tasks: List<TaskItem>) {
-//        this.tasks = tasks.toMutableList()
-//        notifyDataSetChanged()
-//    }
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-//        val view = LayoutInflater.from(parent.context)
-//            .inflate(R.layout.item_task, parent, false)
-//        return ViewHolder(view)
-//    }
-//
-//    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-//        val task = tasks[position]
-//        holder.tvDescription.text = task.description
-//        holder.tvDate.text = task.date
-//        holder.tvTime.text = task.time
-//
-//        holder.btnDelete.setOnClickListener {
-//            val taskId = task.id ?: ""
-//            tasksRef.child(taskId).removeValue()
-//        }
-//    }
-//
-//
-//
-//    override fun getItemCount(): Int {
-//        return tasks.size
-//    }
-//
-//    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-//        val tvDescription: TextView = view.findViewById(R.id.nameTextView)
-//        val tvDate: TextView = view.findViewById(R.id.datetxt)
-//        val tvTime: TextView = view.findViewById(R.id.timetxt)
-//        val btnDelete: ImageButton = view.findViewById(R.id.deleteButton)
-//    }
-//}
 
 class TaskAdapter( private var tasks: MutableList<TaskItem>,private var path : String) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
@@ -103,11 +32,16 @@ class TaskAdapter( private var tasks: MutableList<TaskItem>,private var path : S
         holder.timeTextView.text = task.time
 
         holder.btnDelete.setOnClickListener {
-            val dbRef = FirebaseDatabase.getInstance().getReference("tasks").child(path).child(task.id)
-            dbRef.removeValue().addOnSuccessListener {
-              //  Toast.makeText(Context,"Quiz Removed Successfully",Toast.LENGTH_SHORT).show()
-            }
-           // tasksRef.child(taskId).removeValue()
+            val db = Firebase.firestore
+            val docRef = db.collection(path).document(task.id)
+            docRef.delete()
+                .addOnSuccessListener {
+                    Log.d(TAG, "DocumentSnapshot successfully deleted!")
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error deleting document", e)
+                }
+
         }
     }
 
