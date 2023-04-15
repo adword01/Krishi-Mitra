@@ -1,7 +1,7 @@
 # Krishi-Mitra-ML
-
+<h1 align="center"><img src = "https://github.com/0xSushmanth/Krishi-Mitra-ML/blob/main/Krishi%20Mitra.png"></h1>
 Krishi-Mitra-ML is a machine learning-based solution for precision agriculture that utilizes a Random Forest Classifier. 
-This solution is designed to provide farmers with accurate crop recommendations based on soil characteristics, weather conditions, and crop yield data, enabling them to make informed decisions for optimal crop cultivation practices.
+This solution is designed to provide farmers with crop recommendations based on soil characteristics, weather conditions, and crop yield data, enabling them to make informed decisions for optimal crop cultivation practices.
 
 ## Krishi-Mitra-API
 
