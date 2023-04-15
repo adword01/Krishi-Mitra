@@ -23,7 +23,7 @@ class AddTaskViewModel : ViewModel() {
     val selectedDate: LiveData<String>
         get() = _selectedDate
 
-    private lateinit var context: Context
+  //  private lateinit var context: Context
 
 
     fun saveTask(description: String, time: String, date: String) {
@@ -33,11 +33,10 @@ class AddTaskViewModel : ViewModel() {
         database.child("tasks").push().setValue(task)
     }
     fun setContext(context: Context) {
-        this.context = context
     }
 
     // Function to show the TimePicker dialog
-    fun showTimePicker() {
+    fun showTimePicker(context : Context) {
         val currentTime = Calendar.getInstance()
         val hour = currentTime.get(Calendar.HOUR_OF_DAY)
         val minute = currentTime.get(Calendar.MINUTE)
@@ -56,7 +55,7 @@ class AddTaskViewModel : ViewModel() {
     }
 
     // Function to show the DatePicker dialog
-    fun showDatePicker() {
+    fun showDatePicker(context: Context) {
         val currentDate = Calendar.getInstance()
         val year = currentDate.get(Calendar.YEAR)
         val month = currentDate.get(Calendar.MONTH)

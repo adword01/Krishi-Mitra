@@ -1,5 +1,7 @@
 package com.example.krishimitra.fragments
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +9,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,17 +18,15 @@ import com.example.krishimitra.MapActivity
 import com.example.krishimitra.R
 import com.example.krishimitra.databinding.FragmentGreetBinding
 import com.example.krishimitra.models.TaskItem
-import com.example.krishimitra.roomDatabase.AddTaskBottomSheetFragment
-import com.example.krishimitra.roomDatabase.AddTaskViewModel
 import com.example.krishimitra.roomDatabase.TaskAdapter
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.util.*
@@ -36,11 +38,11 @@ class GreetFragment : Fragment()  {
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var auth : FirebaseAuth
     private lateinit var authName : String
+    private lateinit var database: DatabaseReference
     private lateinit var authEmail : String
+    private lateinit var date : String
     private lateinit var authnumber : String
-   // private lateinit var tasks: ArrayList<TaskItem>
-    private lateinit var viewModel: AddTaskViewModel
-    private lateinit var taskAdapter: TaskAdapter
+    private lateinit var time : String
 
 
 
@@ -51,12 +53,9 @@ class GreetFragment : Fragment()  {
         binding = FragmentGreetBinding.inflate(inflater,container,false)
         // Inflate the layout for this fragment
 
-//        val args = this.arguments
-//        val inputData = args?.get("name")
-//        binding.profileName.text = inputData.toString()
 //
         val view = inflater.inflate(R.layout.fragment_greet, container, false)
-
+        database = Firebase.database.reference
         getRecylerView()
         binding.mapIv.setOnClickListener {
             val intent = Intent(activity, MapActivity::class.java)
@@ -64,15 +63,9 @@ class GreetFragment : Fragment()  {
         }
 
         binding.addToDo.setOnClickListener {
-            val bottomSheetFragment = AddTaskBottomSheetFragment()
-            bottomSheetFragment.show(parentFragmentManager, "AddTaskBottomSheetFragment")
-
+            showbottomsheet()
         }
-//        viewModel = ViewModelProvider(this).get(AddTaskViewModel::class.java)
-//        viewModel.tasks.observe(viewLifecycleOwner, { tasks ->
-//            adapter.tasks = tasks
-//            adapter.notifyDataSetChanged()
-//        })
+
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
@@ -116,19 +109,93 @@ class GreetFragment : Fragment()  {
 
             }
         }
-
-
         //    return inflater.inflate(R.layout.fragment_greet, container, false)
         return binding.root
     }
 
+    private fun showbottomsheet() {
+
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        val view = layoutInflater.inflate(R.layout.bottomsheet, null)
+        bottomSheetDialog.setContentView(view)
+
+        val btndate = view.findViewById<FloatingActionButton>(R.id.btndatepicker)
+        val savebtn = view.findViewById<Button>(R.id.btnSave)
+        val btntime = view.findViewById<FloatingActionButton>(R.id.tvTime)
+
+        btntime.setOnClickListener {
+
+            val currentTime = Calendar.getInstance()
+            val hour = currentTime.get(Calendar.HOUR_OF_DAY)
+            val minute = currentTime.get(Calendar.MINUTE)
+            val timePicker = TimePickerDialog(
+                context,
+                { _, selectedHour, selectedMinute ->
+                    // Set the selected time to the TextView
+                    time = String.format("%02d:%02d", selectedHour, selectedMinute)
+                    view.findViewById<EditText>(R.id.selectedtime).setText(time)
+
+                },
+                hour,
+                minute,
+                true
+            )
+            timePicker.show()
+        }
+        btndate.setOnClickListener {
+
+            val currentDate = Calendar.getInstance()
+            val year = currentDate.get(Calendar.YEAR)
+            val month = currentDate.get(Calendar.MONTH)
+            val dayOfMonth = currentDate.get(Calendar.DAY_OF_MONTH)
+
+            // Create a DatePickerDialog and show it
+            val datePicker = activity?.let { it1 ->
+                DatePickerDialog(
+                    it1,
+                    { _, selectedYear, selectedMonth, selectedDayOfMonth ->
+                        // Set the selected date to a TextView or some other view
+                        date = String.format(
+                            "%02d/%02d/%04d",
+                            selectedDayOfMonth,
+                            selectedMonth + 1,
+                            selectedYear
+                        )
+                        Toast.makeText(activity,"$date",Toast.LENGTH_SHORT).show()
+                        view.findViewById<EditText>(R.id.selecteddate).setText(date)
+                    },
+                    year,
+                    month,
+                    dayOfMonth
+                )
+            }
+            datePicker!!.show()
+        }
+
+       savebtn.setOnClickListener {
+
+            val description = view.findViewById<EditText>(R.id.etDescription).text.toString()
+
+            if (description.isNotBlank() ) {
+                val key = database.push().key // generate a new key for the task item
+                val ID = key // set the key as the ID field
+                val task = TaskItem(id = ID!!, description = description, time = time, date = date)
+                key?.let {
+                    database.child("tasks").child(auth.currentUser!!.uid).child(key).setValue(task)
+                }
+
+            } else {
+                Toast.makeText(context, "Please fill all fields", Toast.LENGTH_SHORT).show()
+            }
+        }
+        bottomSheetDialog.show()
+
+    }
+
     private fun getRecylerView() {
-       // tasks = arrayListOf<TaskItem>()
-        val database = FirebaseDatabase.getInstance()
-        val tasksRef = database.getReference("tasks")
-
-
-       // val recyclerView = requireView().findViewById<RecyclerView>(R.id.todoListRecyclerView)
+        auth = FirebaseAuth.getInstance()
+        val path = auth.currentUser!!.uid
+        val tasksRef = database.child("tasks").child(path)
 
 
         // set Up recyclerview
@@ -139,13 +206,8 @@ class GreetFragment : Fragment()  {
                 for (taskSnapshot in dataSnapshot.children) {
                     val task = taskSnapshot.getValue(TaskItem::class.java)
                     tasks.add(task!!)
-                    //   task?.let { tasks.add(it) }
-                    //           Toast.makeText(activity, task.description,Toast.LENGTH_SHORT).show()
-//                    Toast.makeText(activity, task.id,Toast.LENGTH_SHORT).show()
-//                    Toast.makeText(activity, task.time,Toast.LENGTH_SHORT).show()
-//                    Toast.makeText(activity, task.date,Toast.LENGTH_SHORT).show()
                 }
-                val Tadapter = TaskAdapter(tasks)
+                val Tadapter = TaskAdapter(tasks,path)
                 binding.todoListRecyclerView.adapter = Tadapter
                 Tadapter!!.setTasks(tasks)
                 binding.todoListRecyclerView.layoutManager = LinearLayoutManager(context)

@@ -92,8 +92,6 @@ class UserProfileFragment : Fragment() {
     }
 
 
-
-
     private fun EmailData(){
         val db = Firebase.firestore
         val docRef = db.collection("User").document(authEmail)

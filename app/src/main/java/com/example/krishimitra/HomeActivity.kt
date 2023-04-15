@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.krishimitra.databinding.ActivityHomeBinding
 import com.example.krishimitra.fragments.GreetFragment
+import com.example.krishimitra.fragments.PredictCrop
 import com.example.krishimitra.fragments.UserProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -34,6 +35,12 @@ class HomeActivity : AppCompatActivity(){
         setUpNavigationview()
       //  setRecyclerView()
     }
+
+    override fun onBackPressed() {
+        moveTaskToBack(true)
+        finish()
+    }
+
     private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container,fragment)
@@ -54,8 +61,6 @@ class HomeActivity : AppCompatActivity(){
                 }
 
                 R.id.sale -> {
-                    val intent = Intent(this,MainActivity::class.java)
-                    startActivity(intent)
                   Toast.makeText(this@HomeActivity,"Sale selected",Toast.LENGTH_SHORT).show()
                 }
 
@@ -64,6 +69,8 @@ class HomeActivity : AppCompatActivity(){
                 }
 
                 R.id.recommend -> {
+                    loadFragment(PredictCrop())
+
                 //    Toast.makeText(this@HomeActivity,"Recommendation",Toast.LENGTH_SHORT).show()
                   //  loadFragment(NewTaskSheet(null))
 

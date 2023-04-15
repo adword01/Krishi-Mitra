@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.PredictCrop">
+
+<LinearLayout
+    android:layout_marginTop="15dp"
+    android:padding="15dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:text="Ratios of content in soil"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField1"
+            android:layout_marginRight="5dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="117dp"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text"
+            app:helperText="Required"
+            app:helperTextTextColor="#F11111"
+            android:hint="Nitrogen">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Nitrogen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField2"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text"
+            app:helperText="Required"
+            app:helperTextTextColor="#F11111"
+            android:hint="Phosphorous">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Phosphorous"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField3"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="118dp"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text"
+            app:helperText="Required"
+            app:helperTextTextColor="#F11111"
+            android:hint="Potassium">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Potassium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginRight="5dp"
+            android:id="@+id/textField4"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text"
+            app:helperText="Required"
+            app:helperTextTextColor="#F11111"
+            android:hint="Temperature">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Temperature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginRight="5dp"
+            android:id="@+id/textField5"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text"
+            app:helperText="Required"
+            app:helperTextTextColor="#F11111"
+            android:hint="Humidity in %">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Humidity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginRight="5dp"
+            android:id="@+id/textField6"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text"
+            app:helperText="Required"
+            android:imeOptions="actionNext"
+            app:helperTextTextColor="#F11111"
+            android:hint="pH of soil">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pH"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginRight="5dp"
+            android:id="@+id/textField7"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text"
+            app:helperText="Required"
+            app:helperTextTextColor="#F11111"
+            android:hint="rainfall in mm">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/rain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:imeOptions="actionNext"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/predictbtn"
+        android:text="Predict Crop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="20dp"
+        android:id="@+id/crop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>
+
+
+</FrameLayout>

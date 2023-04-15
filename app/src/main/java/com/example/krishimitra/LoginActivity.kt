@@ -28,6 +28,7 @@ import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.jakewharton.threetenabp.AndroidThreeTen.init
 import java.util.concurrent.TimeUnit
 
 
@@ -155,12 +156,33 @@ class LoginActivity : AppCompatActivity() {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
-                val intent = Intent(this, HomeActivity::class.java)
-              //  EmailData()
-                intent.putExtra("email", account.email)
-                intent.putExtra("name", account.displayName)
-                startActivity(intent)
-                Log.d("Success","Successful")
+                authEmail = auth.currentUser!!.email.toString()
+                val db = Firebase.firestore
+                val docRef = db.collection("User").document(authEmail)
+
+                docRef.get()
+                    .addOnSuccessListener { documentSnapshot ->
+                        if (documentSnapshot.exists()) {
+                            val email = documentSnapshot.getString("email")
+                            if (email == authEmail){
+                                val intent = Intent(this,HomeActivity::class.java)
+                                intent.putExtra("email", account.email)
+                                intent.putExtra("name", account.displayName)
+                                startActivity(intent)
+                                finish()
+                            }
+                        } else {
+                            val intent = Intent(this, EditProfileActivity::class.java)
+                            //  EmailData()
+                            intent.putExtra("email", account.email)
+                            intent.putExtra("name", account.displayName)
+                            startActivity(intent)
+                            Log.d("Success","Successful")
+                            Log.d(TAG, "Document does not exist")
+                            finish()
+                        }
+                    }
+
             } else {
                 Log.d("Error",it.exception.toString())
                 Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
@@ -177,14 +199,6 @@ class LoginActivity : AppCompatActivity() {
         val animationView = dialog.findViewById<LottieAnimationView>(R.id.animationView)
         animationView.playAnimation()
 
-//        animationView.addAnimatorUpdateListener {
-////            dialog.dismiss()
-////            binding.verifyBtn.setVisibility(View.VISIBLE)
-////            binding.verifyTxt.setVisibility(View.VISIBLE)
-//
-////            val intent =Intent(this,LoginActivity::class.java)
-////            startActivity(intent)
-//        }
 
         val login_btn = findViewById<Button>(R.id.closeButton)
 
@@ -320,4 +334,5 @@ class LoginActivity : AppCompatActivity() {
             }
 
     }
+
 }

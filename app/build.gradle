@@ -54,6 +54,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.4.5'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation "com.google.android.material:material:1.8.0"
 
 
     //Lottie
@@ -77,8 +78,8 @@ dependencies {
 
         // Add the dependency for the Firebase Authentication library
         // When using the BoM, you don't specify versions in Firebase library dependencies
-        implementation 'com.google.firebase:firebase-auth:21.1.0'
-    implementation 'com.google.android.gms:play-services-auth:20.4.1'
+        implementation 'com.google.firebase:firebase-auth:21.2.0'
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
   //  implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
     implementation 'com.squareup.picasso:picasso:2.8'
 
@@ -99,4 +100,14 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:1.5.6"
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 
+
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
+
+
+    //retrofit
+
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 }

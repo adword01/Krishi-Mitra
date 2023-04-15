@@ -88,7 +88,7 @@ import com.google.firebase.database.FirebaseDatabase
 //    }
 //}
 
-class TaskAdapter( private var tasks: MutableList<TaskItem>) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter( private var tasks: MutableList<TaskItem>,private var path : String) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_task, parent, false)
@@ -103,7 +103,7 @@ class TaskAdapter( private var tasks: MutableList<TaskItem>) : RecyclerView.Adap
         holder.timeTextView.text = task.time
 
         holder.btnDelete.setOnClickListener {
-            val dbRef = FirebaseDatabase.getInstance().getReference("tasks").child(task.id)
+            val dbRef = FirebaseDatabase.getInstance().getReference("tasks").child(path).child(task.id)
             dbRef.removeValue().addOnSuccessListener {
               //  Toast.makeText(Context,"Quiz Removed Successfully",Toast.LENGTH_SHORT).show()
             }
