@@ -1,7 +1,9 @@
 package com.example.krishimitra.fragments
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -27,7 +29,6 @@ import kotlin.concurrent.fixedRateTimer
 
 class UserProfileFragment : Fragment() {
 
-
     private lateinit var Editbutton : Button
     private lateinit var binding : FragmentUserProfileBinding
     private lateinit var auth : FirebaseAuth
@@ -36,6 +37,8 @@ class UserProfileFragment : Fragment() {
     private lateinit var authnumber : String
     private lateinit var phoneNumberWithoutCountryCode : String
     private lateinit var googleSignInClient: GoogleSignInClient
+    var sharedPreferences: SharedPreferences?=null
+
 
 
     override fun onCreateView(
@@ -58,21 +61,44 @@ class UserProfileFragment : Fragment() {
                 .into(binding.profileImage)
         }
         auth = FirebaseAuth.getInstance()
-        authName = auth.currentUser!!.displayName.toString()
-        authEmail = auth.currentUser!!.email.toString()
-        authnumber = auth.currentUser!!.phoneNumber.toString()
-        phoneNumberWithoutCountryCode = authnumber?.replace("^\\+\\d{1,2}".toRegex(), "").toString()
 
+//        phoneNumberWithoutCountryCode = authnumber?.replace("^\\+\\d{1,2}".toRegex(), "").toString()
 
-        if(auth.currentUser!!.email != null){
+        val sharedPreferences = requireContext().getSharedPreferences("USER_PREF", Context.MODE_PRIVATE)
+        val searchvalue = sharedPreferences.getString("email", "User")
+
+        if(searchvalue!!.isEmpty()){
+            authName = auth.currentUser!!.displayName.toString()
+            authEmail = auth.currentUser!!.email.toString()
+            authnumber = auth.currentUser!!.phoneNumber.toString()
             EmailData()
             binding.profileName.text = authName
             binding.mobNumber.text =  authEmail
-        }else{
+        }
+        else{
             phoneData()
+            Toast.makeText(activity,searchvalue,Toast.LENGTH_SHORT).show()
         }
 
+//        if(auth.currentUser!!.email!= null){
+//
+//        }else{
+//            phoneData()
+//        }
+
         binding.logoutbtn.setOnClickListener {
+
+
+            val editor = sharedPreferences.edit()
+
+            editor.putString("username",null )
+            editor.putString("password",null )
+            editor.apply()
+
+
+            restorePrefData()
+
+
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -89,6 +115,11 @@ class UserProfileFragment : Fragment() {
             startActivity(intent)
         }
         return binding.root
+    }
+
+    private fun restorePrefData() :Boolean{
+        sharedPreferences=requireContext().getSharedPreferences("pref",Context.MODE_PRIVATE)
+        return sharedPreferences!!.getBoolean("isFirstTimeRun",false)
     }
 
 
@@ -120,9 +151,11 @@ class UserProfileFragment : Fragment() {
     private fun phoneData(){
         val db = Firebase.firestore
         val docRef = db.collection("User")
-        val searchvalue = phoneNumberWithoutCountryCode
+        val sharedPreferences = requireContext().getSharedPreferences("USER_PREF", Context.MODE_PRIVATE)
+        val searchvalue = sharedPreferences.getString("email", "User")
 
-        docRef.whereEqualTo("mobileNumber",searchvalue)
+
+        docRef.whereEqualTo("email",searchvalue)
             .get()
             .addOnSuccessListener { querySnapshot ->
                 for (document in querySnapshot.documents){

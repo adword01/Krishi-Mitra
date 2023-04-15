@@ -1,21 +1,17 @@
 package com.example.krishimitra.roomDatabase
 
 import android.content.ContentValues.TAG
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.krishimitra.R
 import com.example.krishimitra.models.TaskItem
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-
 
 class TaskAdapter( private var tasks: MutableList<TaskItem>,private var path : String) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
@@ -41,7 +37,6 @@ class TaskAdapter( private var tasks: MutableList<TaskItem>,private var path : S
                 .addOnFailureListener { e ->
                     Log.w(TAG, "Error deleting document", e)
                 }
-
         }
     }
 

@@ -58,13 +58,13 @@ class HomeActivity : AppCompatActivity(){
                     loadFragment(GreetFragment())
                 }
 
-                R.id.sale -> {
-                  Toast.makeText(this@HomeActivity,"Sale selected",Toast.LENGTH_SHORT).show()
-                }
+//                R.id.sale -> {
+//                  Toast.makeText(this@HomeActivity,"Sale selected",Toast.LENGTH_SHORT).show()
+//                }
 
-                R.id.status -> {
+                R.id.chat -> {
                     loadFragment(chatbot())
-                    Toast.makeText(this@HomeActivity,"Status selected",Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this@HomeActivity,"Status selected",Toast.LENGTH_SHORT).show()
                 }
 
                 R.id.recommend -> {

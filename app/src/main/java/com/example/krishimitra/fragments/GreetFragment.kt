@@ -3,6 +3,7 @@ package com.example.krishimitra.fragments
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -43,6 +44,7 @@ class GreetFragment : Fragment()  {
     private lateinit var date : String
     private lateinit var authnumber : String
     private lateinit var time : String
+    private lateinit var path : String
 
 
 
@@ -51,12 +53,9 @@ class GreetFragment : Fragment()  {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGreetBinding.inflate(inflater,container,false)
-        // Inflate the layout for this fragment
 
-//
         val view = inflater.inflate(R.layout.fragment_greet, container, false)
         database = Firebase.database.reference
-        getRecylerView()
         binding.mapIv.setOnClickListener {
             val intent = Intent(activity, MapActivity::class.java)
             startActivity(intent)
@@ -71,19 +70,28 @@ class GreetFragment : Fragment()  {
             .build()
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
         val account = GoogleSignIn.getLastSignedInAccount(requireActivity())
-        auth = FirebaseAuth.getInstance()
-        authName = auth.currentUser!!.displayName.toString()
-        authEmail = auth.currentUser!!.email.toString()
-        authnumber = auth.currentUser!!.phoneNumber.toString()
-        phoneNumberWithoutCountryCode = authnumber?.replace("^\\+\\d{1,2}".toRegex(), "").toString()
 
 
-        if(auth.currentUser!!.email != null){
-          //  EmailData()
-           binding.username.text  = authName
+        val sharedPreferences = requireContext().getSharedPreferences("USER_PREF", Context.MODE_PRIVATE)
+        val username = sharedPreferences.getString("username", null)
+        val email = sharedPreferences.getString("email","email")
+
+        if (username == null){
+            auth = FirebaseAuth.getInstance()
+            authName = auth.currentUser!!.displayName.toString()
+            authEmail = auth.currentUser!!.email.toString()
+            binding.username.text  = authName
+            Toast.makeText(activity,authName,Toast.LENGTH_SHORT).show()
+            getRecylerView(authEmail)
+            path = authEmail
         }else{
-            phoneData()
+            Toast.makeText(activity,username,Toast.LENGTH_SHORT).show()
+            binding.username.text=username
+            getRecylerView(email!!)
+            Toast.makeText(activity,email,Toast.LENGTH_SHORT).show()
+            path = email
         }
+
 
         val date = Date()
         val cal: Calendar = Calendar.getInstance()
@@ -109,7 +117,6 @@ class GreetFragment : Fragment()  {
 
             }
         }
-        //    return inflater.inflate(R.layout.fragment_greet, container, false)
         return binding.root
     }
 
@@ -131,7 +138,6 @@ class GreetFragment : Fragment()  {
             val timePicker = TimePickerDialog(
                 context,
                 { _, selectedHour, selectedMinute ->
-                    // Set the selected time to the TextView
                     time = String.format("%02d:%02d", selectedHour, selectedMinute)
                     view.findViewById<EditText>(R.id.selectedtime).setText(time)
 
@@ -149,12 +155,10 @@ class GreetFragment : Fragment()  {
             val month = currentDate.get(Calendar.MONTH)
             val dayOfMonth = currentDate.get(Calendar.DAY_OF_MONTH)
 
-            // Create a DatePickerDialog and show it
             val datePicker = activity?.let { it1 ->
                 DatePickerDialog(
                     it1,
                     { _, selectedYear, selectedMonth, selectedDayOfMonth ->
-                        // Set the selected date to a TextView or some other view
                         date = String.format(
                             "%02d/%02d/%04d",
                             selectedDayOfMonth,
@@ -188,8 +192,7 @@ class GreetFragment : Fragment()  {
                         "time" to time,
                         "date" to date
                     )
-                    db.collection(auth.currentUser!!.email!!).document(key).set(usertask)
-                    database.child("tasks").child(auth.currentUser!!.uid).child(key).setValue(task)
+                    db.collection(path).document(key).set(usertask)
                 }
 
             } else {
@@ -200,54 +203,24 @@ class GreetFragment : Fragment()  {
 
     }
 
-    private fun getRecylerView() {
-        auth = FirebaseAuth.getInstance()
-        val path = auth.currentUser!!.uid
+    private fun getRecylerView(path : String) {
+
 
         val db = Firebase.firestore
-       val email = auth.currentUser!!.email.toString()
 
-        // set Up recyclerview
-
-        db.collection(email).get()
+        db.collection(path).get()
             .addOnSuccessListener { documents ->
                 val tasks = mutableListOf<TaskItem>()
                 for (document in documents) {
                     val task = document.toObject(TaskItem::class.java)
                     tasks.add(task)
                 }
-                val adapter = TaskAdapter(tasks,email)
+                val adapter = TaskAdapter(tasks,path)
                 binding.todoListRecyclerView.adapter = adapter
                 binding.todoListRecyclerView.layoutManager = LinearLayoutManager(context)
             }
             .addOnFailureListener { exception ->
                 Log.w("Firestore", "Error getting documents: ", exception)
             }
-
     }
-
-
-    private fun phoneData(){
-        val db = Firebase.firestore
-        val docRef = db.collection("User")
-        val searchvalue = phoneNumberWithoutCountryCode
-
-        docRef.whereEqualTo("mobileNumber",searchvalue)
-            .get()
-            .addOnSuccessListener { querySnapshot ->
-                for (document in querySnapshot.documents){
-                    val name = document.getString("name")
-
-                    binding.username.text = name
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w(ContentValues.TAG, "Error getting document", exception)
-            }
-    }
-
-
-
-
-
 }

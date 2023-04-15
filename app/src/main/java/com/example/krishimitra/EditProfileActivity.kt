@@ -1,11 +1,13 @@
 package com.example.krishimitra
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.krishimitra.databinding.ActivityEditProfileBinding
 import com.example.krishimitra.models.User
 import com.google.firebase.auth.FirebaseAuth
@@ -25,14 +27,27 @@ class EditProfileActivity : AppCompatActivity() {
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val sharedPreferences =getSharedPreferences("USER_PREF", Context.MODE_PRIVATE)
+        val searchvalue = sharedPreferences.getString("email", "User")
+
         auth = FirebaseAuth.getInstance()
-        authEmail = auth.currentUser!!.email.toString()
-        authName = auth.currentUser!!.displayName.toString()
-        binding.editTextEmail.setText(authEmail)
-        binding.editTextEmail.isEnabled = false
-        binding.editTextName.setText(authName)
-        binding.editTextName.isEnabled = false
-        Log.d("userEmail",authEmail)
+
+        if(searchvalue!!.isEmpty()){
+            authEmail = auth.currentUser!!.email.toString()
+            authName = auth.currentUser!!.displayName.toString()
+            binding.editTextEmail.setText(authEmail)
+            binding.editTextEmail.isEnabled = false
+            binding.editTextName.setText(authName)
+            binding.editTextName.isEnabled = false
+            Log.d("userEmail",authEmail)
+        }else{
+            binding.editTextEmail.setText(searchvalue)
+            binding.editTextEmail.isEnabled = false
+
+        }
+
+
+
         binding.saveinfo.setOnClickListener {
             saveData()
         }
