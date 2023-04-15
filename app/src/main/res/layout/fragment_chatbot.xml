@@ -6,10 +6,17 @@
     tools:context=".fragments.chatbot">
 
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.example.krishimitra.models.DotProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/ll_layout_bar"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:id="@+id/ll_layout_bar"
@@ -61,6 +68,7 @@
             android:layout_height="10dp"
             android:background="#42A5F5"
             android:id="@+id/dark_divider"/>
+
 
 
     </RelativeLayout>

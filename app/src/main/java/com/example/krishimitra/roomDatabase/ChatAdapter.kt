@@ -59,5 +59,7 @@ class ChatAdapter(private val messages: List<chatMessage>) : RecyclerView.Adapte
             messageTextView.text = chatMessage.message
         }
     }
+
+
 }
 

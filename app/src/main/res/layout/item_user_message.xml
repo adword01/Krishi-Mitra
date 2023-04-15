@@ -20,6 +20,6 @@
         android:padding="14dp"
         android:text="This is a sample message that will appear"
         android:textColor="@android:color/white"
-        android:textSize="14sp" />
+        android:textSize="18sp" />
 
 </LinearLayout>
