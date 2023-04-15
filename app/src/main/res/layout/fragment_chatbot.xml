@@ -60,14 +60,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/ll_layout_bar"
-            android:layout_below="@+id/dark_divider"
             tools:itemCount="20" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:background="#42A5F5"
-            android:id="@+id/dark_divider"/>
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="10dp"-->
+<!--            android:background="#42A5F5"-->
+<!--            android:id="@+id/dark_divider"/>-->
 
 
 
