@@ -1,5 +1,5 @@
 runtime: python39
-entrypoint: gunicorn -b :$PORT main:app
+entrypoint: gunicorn -b :$PORT application:app
 
 env_variables:
   RF_CLASSIFIER_PATH: "RandomForest.pkl"
