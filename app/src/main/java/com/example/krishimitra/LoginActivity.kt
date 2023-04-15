@@ -43,7 +43,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var phoneNumberET : EditText
     private lateinit var gso: GoogleSignInOptions
     private lateinit var gsc : GoogleSignInClient
-    private lateinit var number : String
     private lateinit var authEmail : String
 
     private lateinit var sharedPreferences: SharedPreferences
@@ -77,33 +76,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         init()
-//        binding.otpbtn.setOnClickListener {
-////            binding.verifyBtn.setVisibility(View.VISIBLE)
-////            binding.verifyTxt.setVisibility(View.VISIBLE)
-//            binding.otpbtn.setVisibility(View.INVISIBLE)
-//            show()
-//            number = phoneNumberET.text.trim().toString()
-//            if (number.isNotEmpty()){
-//                if (number.length == 10){
-//                    number = "+91$number"
-//                  //  mProgressBar.visibility = View.VISIBLE
-//                    val options = PhoneAuthOptions.newBuilder(auth)
-//                        .setPhoneNumber(number)       // Phone number to verify
-//                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-//                        .setActivity(this)                 // Activity (for callback binding)
-//                        .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
-//                        .build()
-//                    PhoneAuthProvider.verifyPhoneNumber(options)
-//
-//                }else{
-//                    Toast.makeText(this , "Please Enter correct Number" , Toast.LENGTH_SHORT).show()
-//                }
-//            }else{
-//                Toast.makeText(this , "Please Enter Number" , Toast.LENGTH_SHORT).show()
-//
-//            }
-//        }
-//
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
@@ -116,22 +88,9 @@ class LoginActivity : AppCompatActivity() {
         binding.signIn.setOnClickListener {
             //signIn()
             signInGoogle()
-//            val signInIntent = mGoogleSignInClient.signInIntent
-//            startActivityForResult(signInIntent, RC_SIGN_IN)
 
         }
-//
-//    //        binding.verifyBtn.setOnClickListener {
-////            val intent =Intent(this,HomeActivity::class.java)
-////            startActivity(intent)
-////        }
-//
-//
-////        val btn = findViewById<Button>(R.id.button)
-//
-//
-//
-////        show()
+
     }
 
     private fun signInGoogle(){
@@ -212,25 +171,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-//    private fun show(){
-//        val dialog = Dialog(this)
-//        dialog.setContentView(R.layout.login_dialog)
-//
-//        val animationView = dialog.findViewById<LottieAnimationView>(R.id.animationView)
-//        animationView.playAnimation()
-//
-//
-//        val login_btn = findViewById<Button>(R.id.closeButton)
-//
-//
-//        val closeButton = dialog.findViewById<Button>(R.id.closeButton)
-//        closeButton.setOnClickListener {
-//            dialog.dismiss()
-//        }
-//
-//        dialog.show()
-//
-//    }
+
 
     private fun init(){
         mProgressBar = findViewById(R.id.phoneProgressBar)
@@ -242,11 +183,6 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-
-
-
-        //    mProgressBar.visibility = View.VISIBLE
-            // Show a message and update the UI
         }
 
 

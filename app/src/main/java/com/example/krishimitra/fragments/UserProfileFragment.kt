@@ -62,12 +62,11 @@ class UserProfileFragment : Fragment() {
         }
         auth = FirebaseAuth.getInstance()
 
-//        phoneNumberWithoutCountryCode = authnumber?.replace("^\\+\\d{1,2}".toRegex(), "").toString()
 
         val sharedPreferences = requireContext().getSharedPreferences("USER_PREF", Context.MODE_PRIVATE)
-        val searchvalue = sharedPreferences.getString("email", "User")
+        val searchvalue = sharedPreferences.getString("email", null)
 
-        if(searchvalue!!.isEmpty()){
+        if(searchvalue == null){
             authName = auth.currentUser!!.displayName.toString()
             authEmail = auth.currentUser!!.email.toString()
             authnumber = auth.currentUser!!.phoneNumber.toString()
@@ -80,11 +79,7 @@ class UserProfileFragment : Fragment() {
             Toast.makeText(activity,searchvalue,Toast.LENGTH_SHORT).show()
         }
 
-//        if(auth.currentUser!!.email!= null){
-//
-//        }else{
-//            phoneData()
-//        }
+
 
         binding.logoutbtn.setOnClickListener {
 

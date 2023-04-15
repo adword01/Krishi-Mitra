@@ -51,14 +51,17 @@ class chatbot : Fragment() {
             }
 
 
+
             // Inflate the layout for this fragment
 
         }
+
+
         return binding.root
     }
 
     fun getResponse(question: String, callback: (String) -> Unit){
-        val apiKey="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"
+        val apiKey="API KEY"
         val url="https://api.openai.com/v1/engines/text-davinci-003/completions"
 
         val requestBody="""

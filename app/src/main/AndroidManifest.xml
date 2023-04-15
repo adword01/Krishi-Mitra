@@ -29,9 +29,6 @@
             android:name=".MapActivity"
             android:exported="false" />
         <activity
-            android:name=".OTPActivity"
-            android:exported="false" />
-        <activity
             android:name=".EditProfileActivity"
             android:exported="false" />
         <activity
