@@ -1,5 +1,5 @@
 <h1 align="center">  KrishiMitra API</h1>
-# KrishiMitra
+
 
 This repository is API implementation for KRISHI MITRA-ML , predicts the suitable crop based on input data such as nitrogen (N), phosphorous (P), potassium (K) levels in soil, temperature, humidity, pH, and rainfall.
 
@@ -17,21 +17,24 @@ These instructions will help you set up and run the Crop Predictor application l
 1. Clone the repository to your local machine:
 ```sh
 git clone https://github.com/GeekyCats/Crop-Predictor.git
-  
+``` 
+```sh
 cd Crop-Predictor
-
+```
 # Using virtualenv
+```sh
 virtualenv venv
 source venv/bin/activate
-
+```
 # Using conda
+```sh
 conda create --name venv
 conda activate venv
 pip install -r requirements.txt
-
-
-6. Open a web browser and go to `http://127.0.0.1:5000` to access the Crop Predictor application.
-
+```
+```sh
+flask --app application run
+```
 ## Testing with Postman
 
 You can test the Flask API using Postman, a popular API client. Follow these steps:
@@ -60,15 +63,3 @@ You can also deploy the Crop Predictor application on Google Cloud Platform (GCP
 ## Contributing
 
 If you would like to contribute to Crop Predictor, feel free to submit pull requests or open issues on the repository.
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-
-
-
-
-
-
-  
