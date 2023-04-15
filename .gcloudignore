@@ -12,7 +12,8 @@
 # below:
 .git
 .gitignore
-
+.idea
+.vscode
 # Python pycache:
 __pycache__/
 # Ignored by the build system
