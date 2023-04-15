@@ -6,7 +6,6 @@ Krishi-Mitra is an Android app made in Kotlin that can help farmers predict the 
 ## Features
 
 - Crop prediction based on location, weather conditions, and soil type.
-- Fertilizer suggestion for each crop based on soil type.
 - Weather forecast for the next 7 days.
 - User-friendly interface.
 
