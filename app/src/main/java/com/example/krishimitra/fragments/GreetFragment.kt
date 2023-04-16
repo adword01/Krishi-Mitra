@@ -2,10 +2,8 @@ package com.example.krishimitra.fragments
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,7 +15,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.krishimitra.MapActivity
 import com.example.krishimitra.R
 import com.example.krishimitra.databinding.FragmentGreetBinding
 import com.example.krishimitra.models.TaskItem
@@ -63,8 +60,8 @@ class GreetFragment : Fragment()  {
         val view = inflater.inflate(R.layout.fragment_greet, container, false)
         database = Firebase.database.reference
         binding.mapIv.setOnClickListener {
-            val intent = Intent(activity, MapActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(activity, MapActivity::class.java)
+//            startActivity(intent)
         }
 
 

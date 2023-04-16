@@ -7,35 +7,36 @@
     tools:context=".SignUpActivity">
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="Welcome"
-        android:textSize="48sp" />
+
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="50dp"
-            android:layout_marginStart="10dp"
+
             >
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:lottie_rawRes="@raw/welcome"
+                android:gravity="center"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+
+                 />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+
                 android:layout_gravity="center"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
@@ -57,7 +58,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="25dp"
                 android:layout_gravity="center"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
@@ -78,7 +79,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="25dp"
                 android:layout_gravity="center"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
@@ -99,9 +100,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="25dp"
                 android:layout_gravity="center"
-                app:passwordToggleEnabled="true"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
                 >
@@ -109,7 +109,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:id="@+id/phone_txt"
-                    android:nextFocusDown="@+id/phone_txt"
+                    android:nextFocusDown="@+id/location_txt"
 
                     android:inputType="phone"
                     android:hint="Phone"/>
@@ -119,9 +119,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="25dp"
                 android:layout_gravity="center"
-                app:passwordToggleEnabled="true"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
                 >
@@ -130,7 +129,6 @@
                     android:layout_height="60dp"
                     android:id="@+id/location_txt"
                     android:nextFocusDown="@+id/password_txt"
-
                     android:inputType="textAutoComplete"
                     android:hint="Location"/>
 
@@ -141,7 +139,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="25dp"
                 android:layout_gravity="center"
                 app:passwordToggleEnabled="true"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -163,7 +161,7 @@
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:text="Sign in"/>
 
             <TextView
@@ -175,7 +173,6 @@
                 android:textColor="#56b1ee"
                 android:layout_gravity="center"
                 android:layout_margin="20dp"/>
-
 
 
         </LinearLayout>
