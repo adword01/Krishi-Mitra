@@ -22,7 +22,7 @@ Krishi-Mitra is an Android app made in Kotlin that can help farmers predict the 
 
 ## Tech Stack
 - Git,Github
-- Kotlin,Firebase,Realtime Database,Firestore
+- Kotlin,Firebase,Realtime Database,Firestore,RetroFit,Firebase Storage,OkHTTP
 - Machine Learning,Numpy,Pandas,Scikit-Learn,Random Forest
 - FastAPI,GCP AMD instance,
 
