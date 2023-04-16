@@ -1,64 +1,97 @@
 <h1 align="center">  KrishiMitra API</h1>
-
-
-This repository is API implementation for [KRISHI MITRA-ML](https://github.com/adword01/Krishi-Mitra/tree/ML) , predicts the suitable crop based on input data such as nitrogen (N), phosphorous (P), potassium (K) levels in soil, temperature, humidity, pH, and rainfall.
+<h1 align="center"><img src = "https://github.com/0xSushmanth/Krishi-Mitra-API/blob/master/Krishi%20Mitra.png"></h1>
+Krishi-Mitra-AI is API implementation for KRISHI MITRA APP predicting crop types based on soil and weather parameters such as nitrogen (N), phosphorous (P), potassium (K) levels in soil, temperature, humidity, pH, and rainfall.
+This repository contains the code for the FastAPI backend of the Krishi-Mitra-ML application.
 
 ## Getting Started
 
-These instructions will help you set up and run the Crop Predictor application locally for testing and development purposes.
-
 ### Prerequisites
+Before deploying the API, make sure you have the following:
 
-- Python 3.x
-- Virtual environment (e.g., `virtualenv` or `conda`)
+1. Python 3.9 or higher installed on your local machine.
+2. Google Cloud Platform (GCP) account with appropriate permissions to deploy to App Engine.
+3. Postman or any other REST client for testing the API endpoints.
 
-### Installation
+
+## Installation
+To install the necessary dependencies for the Krishi-Mitra-ML backend, you can run the following command:
 
 1. Clone the repository to your local machine:
 ```sh
-git clone https://github.com/GeekyCats/Crop-Predictor.git
-``` 
-```sh
-cd Crop-Predictor
-```
-# Using virtualenv
-```sh
-virtualenv venv
-source venv/bin/activate
-```
-# Using conda
-```sh
-conda create --name venv
-conda activate venv
 pip install -r requirements.txt
-```
+``` 
+
+### Usage
+Running the FastAPI Application Locally
+To run the FastAPI application locally on your machine, you can use the following command:
+
 ```sh
-flask --app application run
+uvicorn main:app --reload
 ```
+
+This will start the FastAPI application on the localhost,
+and you can access the API endpoints at http://127.0.0.1:8000 in your browser or through a REST client.
+
 ## Testing with Postman
 
-You can test the FASTAPI using Postman, a popular API client. Follow these steps:
+You can test the FastAPI using Postman, a popular API client. Follow these steps
 
-1. Start the FASTAPI application by running the `uvicorn application:app --reload` script.
-2. Open Postman and create a new request.
-3. Set the HTTP method to POST and enter the endpoint URL of the FASTAPI `/predict` endpoint (e.g., `http://127.0.0.1:5000/predict`).
-4. Go to the "Body" tab in Postman, select "form-data" as the type of body, and enter the input data as key-value pairs.
-5. Click on the "Send" button to send the POST request.
-6. You should receive a JSON response from the API, containing the predicted crop based on the input data.
+1. Launch Postman or any other REST client on your machine.
 
-## Parameters to pass
-  You need to enter following values to predict the crop: -
-  - N (ratio of Nitrogen content in soil)
-  - P (ratio of Phosphorous content in soil)
-  - K (ratio of Potassium content in soil)
-  - ph (ph value of soil)
-  - temperature (temperature in degree Celsius)
-  - humidity (relative humidity in %)
-  - rainfall (rainfall in mm)
+2. Set the HTTP method to POST or GET, depending on the endpoint you want to test.
 
-## Deployment on Google Cloud Platform
+3. Enter the URL of the deployed Krishi-Mitra-ML backend API endpoint. For example, if you have deployed the application on Google App Engine, the URL may look like 
+```sh
+https://<your-app-id>.appspot.com/predict.
+```
+4. Set the request body parameters in the Body section of the Postman request. You can either use form-data or raw JSON format, depending on the input expected by your FastAPI application. 
+Here's an example of the expected input format for the API backend:
 
-You can also deploy the Crop Predictor application on Google Cloud Platform (GCP) using tools like Google App Engine or Compute Engine. Follow the deployment steps specific to GCP in the [Deploying on GCP](#deploying-on-gcp) section.
+5. For form-data:
+```sh
+N: ratio of Nitrogen content in soil
+P: ratio of Phosphorous content in soil
+K: ratio of Potassium content in soil
+temperature: temperature in degree Celsius
+humidity: relative humidity in %
+ph: pH value of the soil
+rainfall: rainfall in mm
+```
+For raw JSON:
+```sh
+{
+  "N": 80,
+  "P": 100,
+  "K": 60,
+  "temperature": 30,
+  "humidity": 70,
+  "ph": 6.5,
+  "rainfall": 800
+}
+```
+6. Click on the Send button in Postman to send the request to the API backend.
+
+7. The backend will process the request and return the predicted crop type as a response. You can view the response in the Response section of Postman.
+
+8. Repeat the process with different input parameters to test different scenarios.
+
+9. That's it! You can now use Postman to test the Krishi-Mitra-ML backend API endpoints and verify the functionality of the deployed FastAPI application.
+
+
+## Deployment on Google Cloud Platform and AMD instance
+Deploying the FastAPI Application to Google App Engine
+To deploy the Krishi-Mitra-ML backend to Google App Engine, you can follow these steps:
+
+1. Create an app.yaml file in the root directory of the project. You can use the provided app.yaml example in this repository or customize it based on your requirements.
+
+2. Deploy the FastAPI application to App Engine using the gcloud command-line tool:
+```sh
+gcloud app deploy 
+```
+3. Once the deployment is complete, you can access the API endpoints at the provided App Engine URL.
+
+## Documentation
+Documentation is avaliable here at [API](https://krishimitra-0102.ue.r.appspot.com/docs)
 
 ## Contributing
 
