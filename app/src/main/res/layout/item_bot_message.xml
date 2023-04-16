@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:background="@drawable/recieve_round"
-        android:backgroundTint="#FF7043"
+        android:backgroundTint="#959292"
         android:padding="14dp"
         android:text="This is a sample message that will appear"
         android:textColor="@android:color/white"

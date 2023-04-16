@@ -64,6 +64,8 @@
             android:layout_margin="10dp"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
+            app:boxStrokeColor="#035707"
+            android:textColorHint="#035707"
             app:helperText="Required"
             app:helperTextTextColor="#F11111"
             android:hint="Nitrogen">
@@ -100,7 +102,8 @@
             app:endIconMode="clear_text"
             app:helperText="Required"
             android:layout_margin="10dp"
-
+            app:boxStrokeColor="#035707"
+            android:textColorHint="#035707"
             app:helperTextTextColor="#F11111"
             android:hint="Phosphorous">
 
@@ -110,6 +113,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="8dp"
                 android:imeOptions="actionNext"
+                android:textColorHint="@color/black"
                 android:inputType="numberDecimal" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -138,6 +142,8 @@
             app:endIconMode="clear_text"
             app:helperText="Required"
             app:helperTextTextColor="#F11111"
+            app:boxStrokeColor="#035707"
+            android:textColorHint="#035707"
             android:hint="Potassium">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -176,6 +182,8 @@
             app:endIconMode="clear_text"
             app:helperText="Required"
             app:helperTextTextColor="#F11111"
+            app:boxStrokeColor="#035707"
+            android:textColorHint="#035707"
             android:hint="Temperature">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -211,6 +219,8 @@
             app:endIconMode="clear_text"
             app:helperText="Required"
             app:helperTextTextColor="#F11111"
+            app:boxStrokeColor="#035707"
+            android:textColorHint="#035707"
             android:hint="Humidity in %">
 
 
@@ -255,6 +265,8 @@
             app:helperText="Required"
             android:imeOptions="actionNext"
             app:helperTextTextColor="#F11111"
+            app:boxStrokeColor="#035707"
+            android:textColorHint="#035707"
             android:hint="pH of soil">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -291,6 +303,8 @@
             app:endIconMode="clear_text"
             app:helperText="Required"
             app:helperTextTextColor="#F11111"
+            app:boxStrokeColor="#035707"
+            android:textColorHint="#035707"
             android:hint="rainfall in mm">
 
             <com.google.android.material.textfield.TextInputEditText

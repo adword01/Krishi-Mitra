@@ -19,7 +19,7 @@
             android:layout_height="70dp"
             android:visibility="gone"
             android:layout_above="@id/ll_layout_bar"
-            app:lottie_rawRes="@raw/dotsbar"
+            app:lottie_rawRes="@raw/chatbotload"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             />

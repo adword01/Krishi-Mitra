@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="thunderstorm">#1361FD</color>
+    <color name="drizzle">#526FA8</color>
+    <color name="rain">#0E8EFF</color>
+    <color name="snow">#987CFF</color>
+    <color name="atmosphere">#A8B4CC</color>
+    <color name="clear">#FF9D6F</color>
+    <color name="clouds">#454A4C</color>
 </resources>

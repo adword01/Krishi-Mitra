@@ -28,11 +28,11 @@ class EditProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val sharedPreferences =getSharedPreferences("USER_PREF", Context.MODE_PRIVATE)
-        val searchvalue = sharedPreferences.getString("email", "User")
+        val searchvalue = sharedPreferences.getString("email", null)
 
         auth = FirebaseAuth.getInstance()
 
-        if(searchvalue!!.isEmpty()){
+        if(searchvalue == null){
             authEmail = auth.currentUser!!.email.toString()
             authName = auth.currentUser!!.displayName.toString()
             binding.editTextEmail.setText(authEmail)

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/profileFragment"
-    android:background="#ffffff"
+    android:background="#e5f2e5"
     tools:context=".fragments.UserProfileFragment">
 
     <TextView
@@ -15,7 +15,7 @@
         android:textSize="24sp"
         android:layout_margin="20dp"
         android:textStyle="bold"
-        android:textColor="#3D8361"
+        android:textColor="#116039"
 
         />
 
@@ -41,7 +41,9 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="start"
-            android:background="@drawable/farmer"/>
+            android:background="@drawable/farmerprofile"/>
+
+
 <!--        <ImageView-->
 <!--            android:id="@+id/profileImage"-->
 <!--            android:layout_marginTop="50dp"-->
@@ -59,7 +61,7 @@
         <TextView
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
 
@@ -74,7 +76,6 @@
                 android:textSize="20sp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-
                 android:layout_gravity="center"
                 android:text="Info"
                 android:id="@+id/mobile"
@@ -94,9 +95,16 @@
     </LinearLayout>
 
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="250dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
 
     <LinearLayout
-        android:layout_marginTop="200dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -115,8 +123,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
-            android:layout_margin="14sp"
+            android:layout_marginTop="16sp"
+            android:layout_marginStart="14sp"
             android:textSize="20sp"
+            android:textColor="@color/black"
             android:text="Name"
             android:id="@+id/Nametxt"
             android:layout_width="match_parent"
@@ -126,7 +136,6 @@
 
     <LinearLayout
 
-        android:layout_marginTop="270dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -149,14 +158,13 @@
             android:textSize="20sp"
             android:text="Number"
             android:id="@+id/phonetxt"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
     <LinearLayout
-
-        android:layout_marginTop="340dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -179,6 +187,7 @@
             android:textSize="20sp"
             android:text="Email"
             android:id="@+id/emailtxt"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -186,9 +195,6 @@
 
     <LinearLayout
 
-
-
-        android:layout_marginTop="410dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -212,7 +218,10 @@
             android:text="Address"
             android:id="@+id/addresstxt"
             android:layout_width="match_parent"
+            android:textColor="@color/black"
             android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
     </LinearLayout>
 
