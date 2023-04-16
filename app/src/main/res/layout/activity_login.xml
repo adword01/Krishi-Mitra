@@ -8,26 +8,18 @@
     tools:context=".LoginActivity">
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_margin="20dp"
-        android:outlineAmbientShadowColor="#609966"
-        android:outlineSpotShadowColor="#609966"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="50dp"
-        android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
         <com.airbnb.lottie.LottieAnimationView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/cardView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_margin="20dp"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/login" />
-    </androidx.cardview.widget.CardView>
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/hello"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
     <TextView
