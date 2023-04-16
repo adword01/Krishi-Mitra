@@ -58,7 +58,7 @@ Clone the project
 - FASTAPI Documentation is available at [here](https://fastapi.tiangolo.com/)
 - Chatbot is implemented using [Rapid API](https://rapidapi.com/SoftNext/api/smartgpt-api/details)
  
-- Weather Api is implemented from [here](https://openweathermap.org/api) 
+- Weather Api is implemented from [OpenWeather](https://openweathermap.org/api) 
 ## Screenshots
 
 
