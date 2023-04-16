@@ -53,6 +53,7 @@ import com.sunayanpradhan.weatherapptutorial.Models.WeatherModel
 import com.sunayanpradhan.weatherapptutorial.Utilites.ApiUtilities
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import org.checkerframework.checker.units.qual.s
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -75,6 +76,9 @@ class GreetFragment : Fragment()  {
     private lateinit var authnumber : String
     private lateinit var time : String
     private lateinit var messaging: FirebaseMessaging
+    private lateinit var userDay : String
+    private lateinit var userYear : String
+    private lateinit var UserMonth : String
 
     private lateinit var path : String
 
@@ -95,10 +99,6 @@ class GreetFragment : Fragment()  {
 
         val view = inflater.inflate(R.layout.fragment_greet, container, false)
         database = Firebase.database.reference
-//        binding.mapIv.setOnClickListener {
-//            val intent = Intent(activity, MapActivity::class.java)
-//            startActivity(intent)
-//        }
 
         fusedLocationProvider= LocationServices.getFusedLocationProviderClient(requireContext())
         getCurrentLocation()
@@ -151,10 +151,10 @@ class GreetFragment : Fragment()  {
             getRecylerView(authEmail)
             path = authEmail
         }else{
-            Toast.makeText(activity,username,Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity,username,Toast.LENGTH_SHORT).show()
             binding.username.text=username
             getRecylerView(email!!)
-            Toast.makeText(activity,email,Toast.LENGTH_SHORT).show()
+//            Toast.makeText(activity,email,Toast.LENGTH_SHORT).show()
             path = email
         }
 
@@ -257,7 +257,15 @@ class GreetFragment : Fragment()  {
                             selectedMonth + 1,
                             selectedYear
                         )
-                        Toast.makeText(activity,"$date",Toast.LENGTH_SHORT).show()
+                        userDay = selectedDayOfMonth.toString()
+                        userYear = selectedYear.toString()
+                        UserMonth = (selectedMonth+1).toString()
+
+                        Toast.makeText(activity,UserMonth,Toast.LENGTH_SHORT).show()
+
+
+
+                      //  Toast.makeText(activity,"$date",Toast.LENGTH_SHORT).show()
                         view.findViewById<EditText>(R.id.selecteddate).setText(date)
                     },
                     year,
@@ -265,10 +273,53 @@ class GreetFragment : Fragment()  {
                     dayOfMonth
                 )
             }
+
             datePicker!!.show()
         }
 
-       savebtn.setOnClickListener {
+//        when(UserMonth.toInt()) {
+//            1 -> {
+//                UserMonth = "January"
+//            }
+//            2 -> {
+//                UserMonth = "Feb"
+//            }
+//            3 -> {
+//                UserMonth = "March"
+//            }
+//            4 -> {
+//                UserMonth = "April"
+//            }
+//            5 -> {
+//                UserMonth = "May"
+//            }
+//            6 -> {
+//                UserMonth = "June"
+//            }
+//            7 -> {
+//                UserMonth = "July"
+//            }
+//            8 -> {
+//                UserMonth = "August"
+//            }
+//            9 -> {
+//                UserMonth = "September"
+//            }
+//            10 -> {
+//                UserMonth = "October"
+//            }
+//            11 -> {
+//                UserMonth = "November"
+//            }
+//            12 -> {
+//                UserMonth = "December"
+//            }
+//        }
+//        Toast.makeText(activity,UserMonth,Toast.LENGTH_SHORT).show()
+
+
+
+        savebtn.setOnClickListener {
 
            bottomSheetDialog.dismiss()
            FirebaseMessaging.getInstance().subscribeToTopic("tasks")
@@ -455,8 +506,6 @@ class GreetFragment : Fragment()  {
                 Manifest.permission.ACCESS_FINE_LOCATION),
             LOCATION_REQUEST_CODE
         )
-
-
     }
 
     private fun isLocationEnabled(): Boolean {
@@ -464,16 +513,8 @@ class GreetFragment : Fragment()  {
         val locationManager = requireContext().getSystemService(Context.LOCATION_SERVICE)
                 as LocationManager
 
-
-//        val locationManager: LocationManager =getSystemService(Context.LOCATION_SERVICE)
-//                as LocationManager
-
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 ||locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-
-
-
-
     }
     private fun checkPermissions(): Boolean {
 
@@ -481,13 +522,9 @@ class GreetFragment : Fragment()  {
                 Manifest.permission.ACCESS_COARSE_LOCATION)
             ==PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED){
-
             return true
-
         }
-
         return false
-
     }
 
     override fun onRequestPermissionsResult(
@@ -497,25 +534,12 @@ class GreetFragment : Fragment()  {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode==LOCATION_REQUEST_CODE){
-
             if (grantResults.isNotEmpty() && grantResults[0]==PackageManager.PERMISSION_GRANTED){
-
                 getCurrentLocation()
-
             }
             else{
-
-
-
-
             }
-
-
-
         }
-
-
-
     }
 
 
@@ -526,61 +550,28 @@ class GreetFragment : Fragment()  {
 
             val currentDate= SimpleDateFormat("dd/MM/yyyy hh:mm").format(Date())
 
-            //dateTime.text=currentDate.toString()
-
-         //   maxTemp.text="Max "+k2c(body?.main?.temp_max!!)+"°"
-
-           // minTemp.text="Min "+k2c(body?.main?.temp_min!!)+"°"
-
             temp.text=""+k2c(body?.main?.temp!!)+"°"
-
             weatherTitle.text=body.weather[0].main
-
             sunriseValue.text=ts2td(body.sys.sunrise.toLong())
-
             sunsetValue.text=ts2td(body.sys.sunset.toLong())
-
             pressureValue.text=body.main.pressure.toString()
-
             humidityValue.text=body.main.humidity.toString()+"%"
-
             tempFValue.text=""+(k2c(body.main.temp).times(1.8)).plus(32)
                 .roundToInt()+"°"
-
-           // citySearch.setText(body.name)
-
             feelsLike.text= ""+k2c(body.main.feels_like)+"°"
-
-            windValue.text=body.wind.speed.toString()+"m/s"
-
-//            groundValue.text=body.main.grnd_level.toString()
-//
-//            seaValue.text=body.main.sea_level.toString()
-
-            //countryValue.text=body.sys.country
-
-
-        }
-
+            windValue.text=body.wind.speed.toString()+"m/s" }
         updateUI(body.weather[0].id)
-
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun ts2td(ts:Long):String{
 
         val localTime=ts.let {
-
             Instant.ofEpochSecond(it)
                 .atZone(ZoneId.systemDefault())
                 .toLocalTime()
-
         }
-
         return localTime.toString()
-
-
     }
 
     private fun k2c(t:Double):Double{
@@ -593,132 +584,49 @@ class GreetFragment : Fragment()  {
     }
 
     private fun updateUI(id: Int) {
-
         binding.apply {
-
-            Toast.makeText(activity,id.toString(),Toast.LENGTH_SHORT).show()
-
             when (id) {
-
-                //Thunderstorm
                 in 200..232 -> {
-
                     weatherImg.setImageResource(R.drawable.ic_storm_weather)
-
-//                    mainLayout.background= ContextCompat
-//                        .getDrawable(requireContext(), R.drawable.thunderstrom_bg)
-
                     optionsLayout.background= ContextCompat
                         .getDrawable(requireContext(), R.drawable.thunderstrom_bg)
-
-
                 }
-
-                //Drizzle
                 in 300..321 -> {
-
                     weatherImg.setImageResource(R.drawable.ic_few_clouds)
-
-//                    mainLayout.background= ContextCompat
-//                        .getDrawable(requireContext(), R.drawable.drizzle_bg)
-
                     optionsLayout.background= ContextCompat
                         .getDrawable(requireContext(), R.drawable.drizzle_bg)
-
-
                 }
-
-                //Rain
                 in 500..531 -> {
-
                     weatherImg.setImageResource(R.drawable.ic_rainy_weather)
-
-//                    mainLayout.background= ContextCompat
-//                        .getDrawable(requireContext(), R.drawable.rain_bg)
-
                     optionsLayout.background= ContextCompat
                         .getDrawable(requireContext(), R.drawable.rain_bg)
-
                 }
-
-                //Snow
                 in 600..622 -> {
-
                     weatherImg.setImageResource(R.drawable.ic_snow_weather)
-
-//                    mainLayout.background= ContextCompat
-//                        .getDrawable(requireContext(), R.drawable.snow_bg)
-
                     optionsLayout.background= ContextCompat
                         .getDrawable(requireContext(), R.drawable.snow_bg)
-
                 }
-
-                //Atmosphere
                 in 701..781 -> {
-
                     weatherImg.setImageResource(R.drawable.ic_broken_clouds)
-
-//                    mainLayout.background= ContextCompat
-//                        .getDrawable(requireContext(), R.drawable.atmosphere_bg)
-
-
                     optionsLayout.background= ContextCompat
                         .getDrawable(requireContext(), R.drawable.atmosphere_bg)
-
                 }
-
-                //Clear
                 800 -> {
-
                     weatherImg.setImageResource(R.drawable.ic_clear_day)
-
-//                    mainLayout.background= ContextCompat
-//                        .getDrawable(requireContext(), R.drawable.clear_bg)
-
                     optionsLayout.background= ContextCompat
                         .getDrawable(requireContext(), R.drawable.clear_bg)
-
                 }
-
-                //Clouds
                 in 801..804 -> {
-
                     weatherImg.setImageResource(R.drawable.ic_cloudy_weather)
-
-//                    mainLayout.background= ContextCompat
-//                        .getDrawable(requireContext(), R.drawable.clouds_bg)
-
                     optionsLayout.background= ContextCompat
                         .getDrawable(requireContext(), R.drawable.clouds_bg)
-
                 }
-
-                //unknown
                 else->{
-
                     weatherImg.setImageResource(R.drawable.ic_unknown)
-
-//                    mainLayout.background= ContextCompat
-//                        .getDrawable(requireContext(), R.drawable.unknown_bg)
-
                     optionsLayout.background= ContextCompat
                         .getDrawable(requireContext(), R.drawable.unknown_bg)
-
-
                 }
-
-
             }
-
-
-
-
-
         }
-
-
-
     }
-
 }
