@@ -26,9 +26,7 @@
         <activity
             android:name=".UserLoginActivity"
             android:exported="false" />
-        <activity
-            android:name=".MapActivity"
-            android:exported="false" />
+
         <activity
             android:name=".EditProfileActivity"
             android:exported="false" />
@@ -61,6 +59,9 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

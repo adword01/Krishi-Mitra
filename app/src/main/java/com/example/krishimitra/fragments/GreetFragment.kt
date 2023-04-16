@@ -420,8 +420,6 @@ class GreetFragment : Fragment()  {
                             fetchCurrentLocationWeather(
                                 location.latitude.toString(),
                                 location.longitude.toString()
-
-
                             )
 
 
@@ -598,6 +596,7 @@ class GreetFragment : Fragment()  {
 
         binding.apply {
 
+            Toast.makeText(activity,id.toString(),Toast.LENGTH_SHORT).show()
 
             when (id) {
 

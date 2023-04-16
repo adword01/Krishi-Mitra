@@ -8,7 +8,7 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="15dp"
         app:cardElevation="5dp"
         app:cardBackgroundColor="#B5F1CC"
         android:layout_margin="8dp">
@@ -31,10 +31,12 @@
                     android:layout_margin="10dp"
                     android:text="Item Name"
                     android:textStyle="bold"
+                    android:fontFamily="@font/cairo_semibold"
                     android:textColor="#3C6255"
                     android:textSize="20sp" />
 
                 <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center">
@@ -51,16 +53,10 @@
                         android:id="@+id/timetxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="$2.50"
+                        android:text="10:00"
                         android:layout_margin="10dp"
                         android:textSize="16sp" />
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -74,11 +70,13 @@
                         android:id="@+id/datetxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="$2.50"
+                        android:text="01/01/2000"
                         android:layout_margin="10dp"
                         android:textSize="16sp" />
 
                 </LinearLayout>
+
+
 
             </LinearLayout>
 
