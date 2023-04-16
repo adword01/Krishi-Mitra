@@ -111,6 +111,7 @@ class GreetFragment : Fragment()  {
 
 
 
+
         binding.addToDo.setOnClickListener {
             lifecycleScope.launch {
                 showbottomsheet()
@@ -149,13 +150,16 @@ class GreetFragment : Fragment()  {
             binding.username.text  = authName
             Toast.makeText(activity,authName,Toast.LENGTH_SHORT).show()
             getRecylerView(authEmail)
+
             path = authEmail
+            getCardData(path)
         }else{
 //            Toast.makeText(activity,username,Toast.LENGTH_SHORT).show()
             binding.username.text=username
             getRecylerView(email!!)
 //            Toast.makeText(activity,email,Toast.LENGTH_SHORT).show()
             path = email
+            getCardData(path)
         }
 
 
@@ -277,45 +281,6 @@ class GreetFragment : Fragment()  {
             datePicker!!.show()
         }
 
-//        when(UserMonth.toInt()) {
-//            1 -> {
-//                UserMonth = "January"
-//            }
-//            2 -> {
-//                UserMonth = "Feb"
-//            }
-//            3 -> {
-//                UserMonth = "March"
-//            }
-//            4 -> {
-//                UserMonth = "April"
-//            }
-//            5 -> {
-//                UserMonth = "May"
-//            }
-//            6 -> {
-//                UserMonth = "June"
-//            }
-//            7 -> {
-//                UserMonth = "July"
-//            }
-//            8 -> {
-//                UserMonth = "August"
-//            }
-//            9 -> {
-//                UserMonth = "September"
-//            }
-//            10 -> {
-//                UserMonth = "October"
-//            }
-//            11 -> {
-//                UserMonth = "November"
-//            }
-//            12 -> {
-//                UserMonth = "December"
-//            }
-//        }
-//        Toast.makeText(activity,UserMonth,Toast.LENGTH_SHORT).show()
 
 
 
@@ -410,6 +375,35 @@ class GreetFragment : Fragment()  {
             })
 
 
+    }
+
+    private fun getCardData(cropPath: String){
+        val dbRef = Firebase.firestore
+        dbRef.collection("cropsdata").document(cropPath).get()
+            .addOnSuccessListener {documentSnapshot ->
+                if (documentSnapshot.exists()){
+                    val crop = documentSnapshot.getString("Crop Name")
+                    val temp = documentSnapshot.getString("temperature")
+                    val n = documentSnapshot.getString("N")
+                    val p = documentSnapshot.getString("P")
+                    val k = documentSnapshot.getString("K")
+                    val humidity = documentSnapshot.getString("humidity")
+                    val ph = documentSnapshot.getString("ph")
+                    val rain = documentSnapshot.getString("rainfall")
+
+
+
+                    binding.rainfallTextView.text = "Rainfall : $rain mm"
+                    binding.cropNameTextView.text = "$crop"
+                    binding.tempTextView.text = "Temp : $temp °C"
+                    binding.nTextView.text = "Nitrogen: $n"
+                    binding.pTextView.text = "Phosphorous : $p"
+                    binding.kTextView.text = "Potassium : $k"
+                    binding.humidityTextView.text = "Humidity : $humidity %"
+                    binding.phTextView.text = "PH value : $ph"
+                }
+
+            }
     }
 
     private fun fetchCurrentLocationWeather(latitude: String, longitude: String) {

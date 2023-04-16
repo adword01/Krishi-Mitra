@@ -75,7 +75,6 @@ class LoginActivity : AppCompatActivity() {
             finish()
         }
 
-        init()
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
@@ -151,7 +150,7 @@ class LoginActivity : AppCompatActivity() {
                                 finish()
                             }
                         } else {
-                            val intent = Intent(this, EditProfileActivity::class.java)
+                            val intent = Intent(this, SignUpActivity::class.java)
                             //  EmailData()
                             intent.putExtra("email", account.email)
                             intent.putExtra("name", account.displayName)
@@ -173,12 +172,7 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-    private fun init(){
-        mProgressBar = findViewById(R.id.phoneProgressBar)
-        mProgressBar.visibility = View.INVISIBLE
-        sendOTPBtn = binding.otpbtn
-        phoneNumberET = binding.phoneNumber
-    }
+
 
 
 

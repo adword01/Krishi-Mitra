@@ -1,6 +1,7 @@
 package com.example.krishimitra.fragments
 
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,11 @@ import androidx.fragment.app.Fragment
 import com.airbnb.lottie.LottieAnimationView
 import com.example.krishimitra.R
 import com.example.krishimitra.databinding.FragmentPredictCropBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +36,10 @@ class PredictCrop : Fragment() {
 
     private lateinit var binding : FragmentPredictCropBinding
     private lateinit var threedots : LottieAnimationView
+    private lateinit var auth : FirebaseAuth
+    private lateinit var authName : String
+    private lateinit var database: DatabaseReference
+    private lateinit var authEmail : String
 
 
     override fun onCreateView(
@@ -58,6 +67,21 @@ class PredictCrop : Fragment() {
        // val cropDescription = dialog.findViewById<Tex
         // tView>(R.id.cropdescription)
         val closeButton = dialog.findViewById<Button>(R.id.closedialog)
+
+        val sharedPreferences = requireContext().getSharedPreferences("USER_PREF", Context.MODE_PRIVATE)
+        val username = sharedPreferences.getString("username", null)
+        val email = sharedPreferences.getString("email",null)
+
+        if (email == null){
+            auth = FirebaseAuth.getInstance()
+            authName = auth.currentUser!!.displayName.toString()
+            authEmail = auth.currentUser!!.email.toString()
+            Toast.makeText(activity,authName,Toast.LENGTH_SHORT).show()
+
+        }else{
+
+            authEmail = email
+        }
 
         closeButton.setOnClickListener {
             dialog.dismiss()
@@ -112,6 +136,20 @@ class PredictCrop : Fragment() {
 
                                 val cropdescription = it.child(cropName).value
 
+                                val dbref = Firebase.firestore
+                                val userData = hashMapOf(
+                                    "Crop Name" to cropName,
+                                    "N" to  binding.Nitrogen.text.toString(),
+                                    "P" to  binding.Phosphorous.text.toString(),
+                                    "K" to binding.Potassium.text.toString(),
+                                    "temperature" to binding.Temperature.text.toString(),
+                                    "humidity" to binding.Humidity.text.toString(),
+                                    "ph" to binding.pH.text.toString(),
+                                    "rainfall" to binding.rain.text.toString()
+                                )
+
+                                dbref.collection("cropsdata").document(authEmail).set(userData)
+
                                 val storageRef = FirebaseStorage.getInstance().reference.child("$cropName.png")
 
                                 storageRef.downloadUrl.addOnSuccessListener { uri ->
@@ -119,6 +157,8 @@ class PredictCrop : Fragment() {
                                     Picasso.get().load(uri).into(dialog.findViewById<ImageView>(R.id.cropImg))
                                     dialog.findViewById<TextView>(R.id.cropdescription).visibility = View.VISIBLE
                                     dialog.findViewById<TextView>(R.id.cropdescription).setText(cropdescription.toString())
+
+
                                 }.addOnFailureListener {
                                     // Handle any errors here
                                     hideProgressBar()
