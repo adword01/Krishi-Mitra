@@ -9,4 +9,5 @@ This is a POC(Proof of concept) kind-of project. The data used here comes up wit
 
 Krishi-Mitra-API is a Flask-based API for the Krishi-Mitra-ML project. 
 It provides endpoints for making predictions using the trained Random Forest Classifier model. 
-You can find the code and documentation for Krishi-Mitra-API in the [Krishi-Mitra-API repository](https://github.com/0xSushmanth/Krishi-Mitra-API).
+You can find the code and documentation for Krishi-Mitra-API in the 
+[Krishi-Mitra-API repository](https://github.com/0xSushmanth/Krishi-Mitra-API).
