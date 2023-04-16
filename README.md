@@ -1,5 +1,5 @@
+<h1 align="center"><img src = "https://github.com/adword01/Krishi-Mitra/blob/ML/krishimitra.png"></h1>
 
-![Logo](https://github.com/adword01/Krishi-Mitra/raw/ML/krishimitra.png)
 
 
 # Krishi-Mitra
@@ -60,8 +60,6 @@ Clone the project
  
 - Weather Api is implemented from [here](https://openweathermap.org/api) 
 ## Screenshots
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
 
 ## Demo
