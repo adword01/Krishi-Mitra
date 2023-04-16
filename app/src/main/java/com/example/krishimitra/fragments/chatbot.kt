@@ -5,19 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.krishimitra.R
+import com.airbnb.lottie.LottieAnimationView
 import com.example.krishimitra.databinding.FragmentChatbotBinding
-import com.example.krishimitra.models.DotProgressBar
 import com.example.krishimitra.models.chatMessage
 import com.example.krishimitra.roomDatabase.ChatAdapter
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody.Companion.toRequestBody
-import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 
@@ -28,7 +24,8 @@ class chatbot : Fragment() {
     private lateinit var binding: FragmentChatbotBinding
     private val chatMessages = mutableListOf<chatMessage>()
     private lateinit var chatAdapter: ChatAdapter
-    private lateinit var progressBar: DotProgressBar
+    private lateinit var threedots : LottieAnimationView
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +33,9 @@ class chatbot : Fragment() {
     ): View? {
         binding = FragmentChatbotBinding.inflate(inflater,container,false)
         chatAdapter = ChatAdapter(chatMessages)
-        progressBar = binding.progressBar
+
+        threedots = binding.dotpgbar
+
 
         binding.rvMessages.apply {
             adapter = chatAdapter
@@ -72,10 +71,11 @@ class chatbot : Fragment() {
     }
 
     private fun showProgressBar() {
-        progressBar.visibility = View.VISIBLE
+        threedots.visibility = View.VISIBLE
+
     }
     private fun hideProgressBar() {
-        progressBar.visibility = View.GONE
+        threedots.visibility = View.GONE
     }
 
     fun getResponse(question: String, callback: (String) -> Unit) {

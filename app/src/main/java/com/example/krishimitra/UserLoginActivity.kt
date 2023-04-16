@@ -10,6 +10,8 @@ import android.widget.Toast
 import com.example.krishimitra.databinding.ActivityUserLoginBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class UserLoginActivity : AppCompatActivity() {
 
@@ -35,6 +37,7 @@ class UserLoginActivity : AppCompatActivity() {
             val passwordLogin: String = loginPassword.text.toString().trim()
 
             if (usernameLogin.isNotEmpty()) {
+
                 database = FirebaseDatabase.getInstance().getReference("Users")
                 database.child(usernameLogin).get().addOnSuccessListener {
 

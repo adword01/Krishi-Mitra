@@ -193,6 +193,7 @@ class GreetFragment : Fragment()  {
                         "date" to date
                     )
                     db.collection(path).document(key).set(usertask)
+                    bottomSheetDialog.dismiss()
                 }
 
             } else {

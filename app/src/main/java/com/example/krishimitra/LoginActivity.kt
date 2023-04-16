@@ -122,12 +122,12 @@ class LoginActivity : AppCompatActivity() {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
-//                authEmail = auth.currentUser!!.email.toString()
-//                val db = Firebase.firestore
-//                val docRef = db.collection("User").document(authEmail)
-                val intent = Intent(this,HomeActivity::class.java)
-                intent.putExtra("email", account.email)
-                intent.putExtra("name", account.displayName)
+                authEmail = auth.currentUser!!.email.toString()
+                val db = Firebase.firestore
+                val docRef = db.collection("User").document(authEmail)
+//                val intent = Intent(this,HomeActivity::class.java)
+//                intent.putExtra("email", account.email)
+//                intent.putExtra("name", account.displayName)
 
 
                     sharedPreferences=applicationContext.getSharedPreferences("pref", Context.MODE_PRIVATE)
@@ -135,32 +135,32 @@ class LoginActivity : AppCompatActivity() {
                     editor.putBoolean("isFirstTimeRun",true)
                     editor.apply()
 
+//
+//                startActivity(intent)
+//                finish()
 
-                startActivity(intent)
-                finish()
-
-//                docRef.get()
-//                    .addOnSuccessListener { documentSnapshot ->
-//                        if (documentSnapshot.exists()) {
-//                            val email = documentSnapshot.getString("email")
-//                            if (email == authEmail){
-//                                val intent = Intent(this,HomeActivity::class.java)
-//                                intent.putExtra("email", account.email)
-//                                intent.putExtra("name", account.displayName)
-//                                startActivity(intent)
-//                                finish()
-//                            }
-//                        } else {
-//                            val intent = Intent(this, EditProfileActivity::class.java)
-//                            //  EmailData()
-//                            intent.putExtra("email", account.email)
-//                            intent.putExtra("name", account.displayName)
-//                            startActivity(intent)
-//                            Log.d("Success","Successful")
-//                            Log.d(TAG, "Document does not exist")
-//                            finish()
-//                        }
-//                    }
+                docRef.get()
+                    .addOnSuccessListener { documentSnapshot ->
+                        if (documentSnapshot.exists()) {
+                            val email = documentSnapshot.getString("email")
+                            if (email == authEmail){
+                                val intent = Intent(this,HomeActivity::class.java)
+                                intent.putExtra("email", account.email)
+                                intent.putExtra("name", account.displayName)
+                                startActivity(intent)
+                                finish()
+                            }
+                        } else {
+                            val intent = Intent(this, EditProfileActivity::class.java)
+                            //  EmailData()
+                            intent.putExtra("email", account.email)
+                            intent.putExtra("name", account.displayName)
+                            startActivity(intent)
+                            Log.d("Success","Successful")
+                            Log.d(TAG, "Document does not exist")
+                            finish()
+                        }
+                    }
 
             } else {
                 Log.d("Error",it.exception.toString())

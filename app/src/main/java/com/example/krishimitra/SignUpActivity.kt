@@ -102,6 +102,8 @@ class SignUpActivity : AppCompatActivity() {
             "password" to binding.passwordTxt.text.toString()
         )
 
+        db.child("Users").child(binding.usernameTxt.text.toString()).setValue(userData)
+
         database.collection("User").document(binding.emailTxt.text.toString()).set(userData)
             .addOnSuccessListener {
                 Toast.makeText(this,"Details added successfully",Toast.LENGTH_SHORT).show()

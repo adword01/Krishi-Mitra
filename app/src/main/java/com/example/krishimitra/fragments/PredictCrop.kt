@@ -1,12 +1,18 @@
 package com.example.krishimitra.fragments
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.airbnb.lottie.LottieAnimationView
+import com.example.krishimitra.R
 import com.example.krishimitra.databinding.FragmentPredictCropBinding
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -21,6 +27,8 @@ class PredictCrop : Fragment() {
 
 
     private lateinit var binding : FragmentPredictCropBinding
+    private lateinit var threedots : LottieAnimationView
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +37,18 @@ class PredictCrop : Fragment() {
         binding = FragmentPredictCropBinding.inflate(inflater, container, false)
 
 
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.cropdialogbox)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+
+        threedots = dialog.findViewById(R.id.dotpgbar)
+       // val cropDescription = dialog.findViewById<Tex
+        // tView>(R.id.cropdescription)
+        val closeButton = dialog.findViewById<Button>(R.id.closedialog)
+
+        closeButton.setOnClickListener {
+            dialog.dismiss()
+        }
 
         binding.predictbtn.setOnClickListener {
             // getData()
@@ -67,6 +87,20 @@ class PredictCrop : Fragment() {
                     requireActivity().runOnUiThread {
                         Toast.makeText(activity, "Predicted crop: $cropName", Toast.LENGTH_SHORT)
                             .show()
+                        dialog.show()
+                        showProgressBar()
+                        dialog.setCanceledOnTouchOutside(false)
+                        dialog.findViewById<TextView>(R.id.cropName).setText(cropName)
+                        val db = FirebaseDatabase.getInstance()
+                        db.reference.child("crops").child("English").get().addOnSuccessListener {
+                            if (it.exists()){
+                                hideProgressBar()
+                                val cropdescription = it.child(cropName).value
+                                dialog.findViewById<TextView>(R.id.cropdescription).visibility = View.VISIBLE
+                                dialog.findViewById<TextView>(R.id.cropdescription).setText(cropdescription.toString())
+                            }
+
+                        }
                     }
 
                 } catch (e: IOException) {
@@ -83,6 +117,13 @@ class PredictCrop : Fragment() {
         return binding.root
     }
 
+    private fun showProgressBar() {
+        threedots.visibility = View.VISIBLE
+
+    }
+    private fun hideProgressBar() {
+        threedots.visibility = View.GONE
+    }
 
 
 }
