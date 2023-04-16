@@ -62,17 +62,19 @@ class EditProfileActivity : AppCompatActivity() {
 
 
 
-        if(binding.editTextEmail.text!!.isEmpty() || binding.editTextName.text!!.isEmpty() || binding.editTextMobileNumber.text!!.isEmpty() || binding.editTextLocation.text!!.isEmpty()){
+        if(binding.editTextName.text!!.isEmpty() ||binding.editTextEmail.text!!.isEmpty() ||binding.editTextUsername.text!!.isEmpty() || binding.editTextPhone.text!!.isEmpty() || binding.editTextLocation.text!!.isEmpty() || binding.editTextPassword.text!!.isEmpty()){
             Toast.makeText(this@EditProfileActivity,"Fill all the fields",Toast.LENGTH_SHORT).show()
             return
         }
-        val User = User(binding.editTextName.text.toString(),binding.editTextMobileNumber.text.toString(),binding.editTextEmail.text.toString(),binding.editTextLocation.text.toString())
+        val User = User(binding.editTextName.text.toString(),binding.editTextEmail.text.toString(),binding.editTextUsername.text.toString(),binding.editTextPhone.text.toString(),binding.editTextLocation.text.toString(),binding.editTextPassword.text.toString())
 
         val userData = hashMapOf(
             "email" to binding.editTextEmail.text.toString(),
             "location" to binding.editTextLocation.text.toString(),
-            "mobileNumber" to binding.editTextMobileNumber.text.toString(),
-            "name" to binding.editTextName.text.toString()
+            "mobileNumber" to binding.editTextPhone.text.toString(),
+            "name" to binding.editTextName.text.toString(),
+            "username" to binding.editTextUsername.text.toString(),
+            "password" to binding.editTextPassword.text.toString()
         )
 
         database.collection("User").document(binding.editTextEmail.text.toString()).set(userData)

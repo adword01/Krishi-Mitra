@@ -31,7 +31,6 @@
                     android:layout_margin="10dp"
                     android:text="Item Name"
                     android:textStyle="bold"
-                    android:fontFamily="@font/cairo_semibold"
                     android:textColor="#3C6255"
                     android:textSize="20sp" />
 
@@ -44,7 +43,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginStart="10dp"
                         android:text="Time :"
                         android:textColor="#3C6255"
                         android:textSize="16sp"/>
@@ -54,27 +53,25 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="10:00"
-                        android:textColor="#135751"
                         android:layout_margin="10dp"
                         android:textSize="16sp" />
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
-                        android:text="Date :"
-                        android:textColor="#3C6255"
-                        android:textSize="16sp"/>
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:text="Date :"-->
+<!--                        android:textColor="#3C6255"-->
+<!--                        android:textSize="16sp"/>-->
 
-                    <TextView
-                        android:id="@+id/datetxt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="01/01/2000"
-                        android:textColor="#135751"
-                        android:layout_margin="10dp"
-                        android:textSize="16sp" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/datetxt"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="01/01/2000"-->
+<!--                        android:layout_margin="10dp"-->
+<!--                        android:textSize="16sp" />-->
 
                 </LinearLayout>
 
@@ -82,20 +79,61 @@
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/more_btn"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:src="@drawable/more"
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/calender_btn"
+                android:layout_width="100dp"
+                android:layout_height="75dp"
+                app:cardElevation="20dp"
                 android:layout_gravity="end|top"
-                android:layout_marginEnd="10dp"/>
+                android:layout_margin="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/useryear"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:hint="year"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
+                    android:textColor="#E8EEF1"
+                    android:background="#FF0000"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/userday"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="day"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textSize="24sp"
+                    android:textColor="#0a5649"/>
+
+                    <TextView
+                        android:id="@+id/userMonth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Month"
+                        android:layout_gravity="center"/>
+
+
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
 
             <ImageView
                 android:id="@+id/deleteButton"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_margin="15dp"
-                android:visibility="gone"
                 android:elevation="10dp"
                 android:outlineSpotShadowColor="#EEF2E6"
                 android:outlineAmbientShadowColor="#EEF2E6"

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.krishimitra.R
 import com.example.krishimitra.models.TaskItem
@@ -24,13 +25,60 @@ class TaskAdapter( private var tasks: MutableList<TaskItem>,private var path : S
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task = tasks[position]
         holder.nameTextView.text = task.description
-        holder.dateTextView.text = task.date
+//        holder.dateTextView.text = task.date
         holder.timeTextView.text = task.time
+        val dateString = task.date
+        val components = dateString.split("/")
+        val day = components[0]
+        var month = components[1]
+        val year = components[2]
 
-        holder.moreBtn.setOnClickListener {
-            holder.btnDelete.visibility=View.VISIBLE
-            holder.moreBtn.visibility=View.INVISIBLE
+        holder.userDay.text = day
+        holder.useryear.text = year
+
+                when(month.toInt()) {
+            1 -> {
+                holder.userMonth.text = "January"
+            }
+            2 -> {
+                holder.userMonth.text = "Feb"
+            }
+            3 -> {
+                holder.userMonth.text = "March"
+            }
+            4 -> {
+                holder.userMonth.text = "April"
+            }
+            5 -> {
+                holder.userMonth.text = "May"
+            }
+            6 -> {
+                holder.userMonth.text = "June"
+            }
+            7 -> {
+                holder.userMonth.text = "July"
+            }
+            8 -> {
+                holder.userMonth.text = "August"
+            }
+            9 -> {
+                holder.userMonth.text = "September"
+            }
+            10 -> {
+                holder.userMonth.text = "October"
+            }
+            11 -> {
+                holder.userMonth.text = "November"
+            }
+            12 -> {
+                holder.userMonth.text = "December"
+            }
         }
+
+//        holder.moreBtn.setOnClickListener {
+//            holder.btnDelete.visibility=View.VISIBLE
+//            holder.moreBtn.visibility=View.INVISIBLE
+//        }
 
         holder.btnDelete.setOnClickListener {
             val db = Firebase.firestore
@@ -57,9 +105,12 @@ class TaskAdapter( private var tasks: MutableList<TaskItem>,private var path : S
 
     inner class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
-        val dateTextView: TextView = itemView.findViewById(R.id.datetxt)
+//        val dateTextView: TextView = itemView.findViewById(R.id.datetxt)
         val timeTextView: TextView = itemView.findViewById(R.id.timetxt)
-        val moreBtn:ImageView=itemView.findViewById(R.id.more_btn)
+//        val moreBtn:ImageView=itemView.findViewById(R.id.more_btn)
+        val userDay : TextView = itemView.findViewById(R.id.userday)
+        val userMonth : TextView = itemView.findViewById(R.id.userMonth)
+        val useryear : TextView = itemView.findViewById(R.id.useryear)
         val btnDelete: ImageView = itemView.findViewById(R.id.deleteButton)
     }
 }
