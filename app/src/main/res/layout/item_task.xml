@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="15dp"
         app:cardElevation="5dp"
-        app:cardBackgroundColor="#B5F1CC"
+        app:cardBackgroundColor="#4cbf7b"
         android:layout_margin="8dp">
 
         <LinearLayout
@@ -85,23 +85,29 @@
                 android:layout_width="100dp"
                 android:layout_height="75dp"
                 app:cardElevation="20dp"
-                android:layout_gravity="end|top"
+                android:background="@color/white"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="10dp"
+
+                android:layout_gravity="center"
                 android:layout_margin="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    >
 
                 <TextView
                     android:id="@+id/useryear"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:hint="year"
-                    android:textSize="20sp"
                     android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="20sp"
                     android:textColor="#E8EEF1"
-                    android:background="#FF0000"
+                    android:background="#0bdff8"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -111,15 +117,18 @@
                     android:text="day"
                     android:textStyle="bold"
                     android:layout_gravity="center"
+                    android:gravity="center"
                     android:textSize="24sp"
-                    android:textColor="#0a5649"/>
+                    android:textColor="#0bdff8"/>
 
                     <TextView
                         android:id="@+id/userMonth"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Month"
-                        android:layout_gravity="center"/>
+                        android:textColor="#407e3f"
+                        android:layout_gravity="center"
+                        android:gravity="center"/>
 
 
 

@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#e5f2e5"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.GreetFragment">
 
@@ -23,6 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Greet Text"
+                android:textColor="#40b884"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -64,8 +67,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/username"
             android:fontFamily="@font/actor"
-            android:hint="Usernmae"
-            android:layout_marginStart="23dp"
+            android:hint="Username"
+            android:textColor="#13a1a4"
+            android:layout_marginStart="20dp"
             android:textSize="20sp"
             />
 
@@ -127,7 +131,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp">
+            android:scrollbars="none">
 
         <LinearLayout
             android:orientation="vertical"
@@ -140,7 +144,8 @@
          <ScrollView
       android:id="@+id/mainLayout"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content">
+             android:background="@drawable/krishi_mitra_grad"
+      android:layout_height="400dp">
 
 
             <LinearLayout
@@ -720,6 +725,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="To-Do"
+                    android:textColor="#3fb885"
                     android:textSize="36sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -745,7 +751,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="50dp"
                 android:id="@+id/todoListRecyclerView"
                 android:backgroundTint="@color/design_default_color_background"
                 />

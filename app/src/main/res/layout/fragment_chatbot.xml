@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#e5f2e5"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.chatbot">
 
@@ -12,6 +13,18 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/chatlogo"
+            android:layout_alignParentTop="true"
+
+            android:id="@+id/chat_logo"
+
+            />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/dotpgbar"
@@ -68,6 +81,7 @@
             android:id="@+id/rv_messages"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@id/chat_logo"
             android:layout_above="@id/dotpgbar"
             tools:itemCount="20" />
 
