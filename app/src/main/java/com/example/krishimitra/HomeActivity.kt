@@ -2,6 +2,7 @@ package com.example.krishimitra
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -57,6 +58,8 @@ class HomeActivity : AppCompatActivity(){
             when(it.itemId){
                 R.id.Home -> {
                     loadFragment(GreetFragment())
+//                    binding.bottomNav.bottomNavigation.visibility = View.VISIBLE
+
                 }
 
 //                R.id.sale -> {
@@ -65,11 +68,14 @@ class HomeActivity : AppCompatActivity(){
 
                 R.id.chat -> {
                     loadFragment(chatbot())
+//                    binding.bottomNav.bottomNavigation.visibility = View.GONE
+
 //                    Toast.makeText(this@HomeActivity,"Status selected",Toast.LENGTH_SHORT).show()
                 }
 
                 R.id.recommend -> {
                     loadFragment(PredictCrop())
+//                    binding.bottomNav.bottomNavigation.visibility = View.GONE
 
                 //    Toast.makeText(this@HomeActivity,"Recommendation",Toast.LENGTH_SHORT).show()
                   //  loadFragment(NewTaskSheet(null))
@@ -77,6 +83,8 @@ class HomeActivity : AppCompatActivity(){
                 }
                 R.id.usrprofile ->{
                     loadFragment(UserProfileFragment())
+//                    binding.bottomNav.bottomNavigation.visibility = View.VISIBLE
+
 //                    true
 //                    val intent = Intent(this,UserProfileFragment::class.java)
 //                    startActivity(intent)

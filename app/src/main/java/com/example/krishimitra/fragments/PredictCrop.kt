@@ -36,6 +36,16 @@ class PredictCrop : Fragment() {
     ): View? {
         binding = FragmentPredictCropBinding.inflate(inflater, container, false)
 
+        binding.backBtn.setOnClickListener {
+            val previousFragment = GreetFragment() // Create a new instance of the previous fragment
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.container, previousFragment)
+            fragmentTransaction.commit()
+//            val fragmentManager = requireActivity().supportFragmentManager
+//
+//                fragmentManager.popBackStack()
+        }
 
         val dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.cropdialogbox)
@@ -49,6 +59,8 @@ class PredictCrop : Fragment() {
         closeButton.setOnClickListener {
             dialog.dismiss()
         }
+
+
 
         binding.predictbtn.setOnClickListener {
             // getData()

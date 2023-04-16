@@ -7,31 +7,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.PredictCrop">
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+
 <LinearLayout
 
     android:orientation="vertical"
-
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center|start"
+
+        android:layout_marginStart="10dp"
+        android:src="@drawable/back"/>
 
     <TextView
         android:text="Ratios of content in soil"
         android:textSize="25sp"
         android:layout_margin="20dp"
         android:textStyle="bold"
+        android:layout_gravity="center"
         android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/nitrogen"/>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textField1"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="120dp"
+            android:layout_width="200dp"
             android:layout_margin="10dp"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
@@ -49,12 +77,24 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/phosphorus"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textField2"
 
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="120dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
             android:layout_gravity="end"
@@ -77,17 +117,23 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center">
+        >
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/potassium"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textField3"
             android:layout_margin="10dp"
 
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="120dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
             app:helperText="Required"
@@ -114,12 +160,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/celsius"/>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_margin="10dp"
             android:id="@+id/textField4"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="180dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
             app:helperText="Required"
@@ -136,16 +188,32 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/humidity"/>
+
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_margin="10dp"
             android:id="@+id/textField5"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="180dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
             app:helperText="Required"
             app:helperTextTextColor="#F11111"
             android:hint="Humidity in %">
+
+
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/Humidity"
@@ -168,13 +236,20 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/ph"/>
+
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_margin="10dp"
 
             android:id="@+id/textField6"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="180dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
             app:helperText="Required"
@@ -191,12 +266,27 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/rainfall"/>
+
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_margin="10dp"
 
             android:id="@+id/textField7"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="180dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
             app:helperText="Required"
@@ -218,7 +308,7 @@
 
     <Button
         android:layout_margin="10dp"
-
+        android:layout_marginBottom="30dp"
         android:id="@+id/predictbtn"
         android:text="Predict Crop"
         android:layout_width="match_parent"
@@ -234,6 +324,7 @@
 
 
 </LinearLayout>
+    </ScrollView>
 
 
 </FrameLayout>
