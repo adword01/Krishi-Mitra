@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#e5f2e5"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.PredictCrop">
 
@@ -53,17 +54,16 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:src="@drawable/nitrogen"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textField1"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_margin="10dp"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
-            android:layout_gravity="start"
             app:helperText="Required"
             app:helperTextTextColor="#F11111"
             android:hint="Nitrogen">
@@ -72,6 +72,7 @@
                 android:id="@+id/Nitrogen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:imeOptions="actionNext"
                 android:inputType="numberDecimal" />
 
@@ -87,17 +88,16 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:src="@drawable/phosphorus"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textField2"
 
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
-            android:layout_gravity="end"
             app:helperText="Required"
             android:layout_margin="10dp"
 
@@ -125,7 +125,7 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:src="@drawable/potassium"/>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -133,7 +133,7 @@
             android:layout_margin="10dp"
 
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
             app:helperText="Required"
@@ -163,7 +163,7 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:src="@drawable/celsius"/>
 
 
@@ -171,7 +171,7 @@
             android:layout_margin="10dp"
             android:id="@+id/textField4"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
             app:helperText="Required"
@@ -198,7 +198,7 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:src="@drawable/humidity"/>
 
 
@@ -206,7 +206,7 @@
             android:layout_margin="10dp"
             android:id="@+id/textField5"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
             app:helperText="Required"
@@ -239,7 +239,7 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:src="@drawable/ph"/>
 
 
@@ -249,7 +249,7 @@
 
             android:id="@+id/textField6"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
             app:helperText="Required"
@@ -277,7 +277,7 @@
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:src="@drawable/rainfall"/>
 
 
@@ -286,7 +286,7 @@
 
             android:id="@+id/textField7"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:endIconMode="clear_text"
             app:helperText="Required"
@@ -307,8 +307,10 @@
 
 
     <Button
-        android:layout_margin="10dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp"
         android:id="@+id/predictbtn"
         android:text="Predict Crop"
         android:layout_width="match_parent"

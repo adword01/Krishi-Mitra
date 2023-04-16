@@ -72,7 +72,7 @@ class UserProfileFragment : Fragment() {
             authnumber = auth.currentUser!!.phoneNumber.toString()
             EmailData()
             binding.profileName.text = authName
-            binding.mobNumber.text =  authEmail
+            binding.mobile.text =  authEmail
         }
         else{
             phoneData()
@@ -165,7 +165,7 @@ class UserProfileFragment : Fragment() {
                     binding.phonetxt.text = mobNumber
                     binding.addresstxt.text = location
                     binding.profileName.text = name
-                    binding.mobNumber.text =  email
+                    binding.mobile.text =  email
                     Log.d(TAG, "Email: $email")
                 }
             }
