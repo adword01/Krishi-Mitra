@@ -42,6 +42,7 @@ class HomeActivity : AppCompatActivity(){
         finish()
     }
 
+
     private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container,fragment)

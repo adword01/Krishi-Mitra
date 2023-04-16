@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
         app:cardElevation="5dp"
-        app:cardBackgroundColor="#CDDC39"
+        app:cardBackgroundColor="#1C6758"
         android:layout_margin="8dp">
 
         <LinearLayout
@@ -31,7 +31,7 @@
                     android:layout_margin="10dp"
                     android:text="Item Name"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
+                    android:textColor="#EEF2E6"
                     android:textSize="20sp" />
 
                 <LinearLayout
@@ -44,7 +44,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="Time :"
-                        android:textColor="@color/black"
+                        android:textColor="#EEF2E6"
                         android:textSize="16sp"/>
 
                     <TextView
@@ -67,7 +67,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:text="Date :"
-                        android:textColor="@color/black"
+                        android:textColor="#EEF2E6"
                         android:textSize="16sp"/>
 
                     <TextView
@@ -83,10 +83,22 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/deleteButton"
+                android:id="@+id/more_btn"
                 android:layout_width="55dp"
                 android:layout_height="55dp"
+                android:src="@drawable/more"
+                android:layout_gravity="end|top"
+                android:layout_marginEnd="10dp"/>
+
+            <ImageView
+                android:id="@+id/deleteButton"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_margin="15dp"
+                android:visibility="gone"
+                android:elevation="10dp"
+                android:outlineSpotShadowColor="#EEF2E6"
+                android:outlineAmbientShadowColor="#EEF2E6"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/garbage_icon"/>
 

@@ -52,10 +52,14 @@ dependencies {
     implementation 'androidx.databinding:databinding-runtime:7.4.2'
     implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
     implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
+    implementation 'com.google.firebase:firebase-messaging:23.0.0'
+
     implementation 'com.google.firebase:firebase-firestore-ktx:24.4.5'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation "com.google.android.material:material:1.8.0"
 
+
+    
 
     //Lottie
     def lottieVersion = "3.4.0"

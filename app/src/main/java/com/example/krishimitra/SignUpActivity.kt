@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -108,6 +109,8 @@ class SignUpActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 Toast.makeText(this,"Details added successfully",Toast.LENGTH_SHORT).show()
                 val intent = Intent(this,HomeActivity::class.java)
+                FirebaseMessaging.getInstance().subscribeToTopic("tasks")
+
                 startActivity(intent)
                 finish()
             }.addOnFailureListener {err ->

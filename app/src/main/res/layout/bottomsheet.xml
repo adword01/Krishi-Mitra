@@ -35,19 +35,19 @@
             <EditText
                 android:id="@+id/selecteddate"
                 android:text="Date"
-                android:layout_width="280dp"
+                android:minHeight="48dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:editable="false"/>
 
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btndatepicker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@drawable/date"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="20dp"/>
+                android:layout_margin="10dp"/>
 
 
         </LinearLayout>
@@ -62,8 +62,9 @@
             <EditText
                 android:id="@+id/selectedtime"
                 android:text="Time"
-                android:layout_width="280dp"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:minHeight="48dp"
                 android:editable="false"/>
 <!--            -->
 <!--            <TextView-->
@@ -76,12 +77,11 @@
 <!--                android:layout_marginBottom="10dp"/>-->
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/tvTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@drawable/time"
                 android:layout_gravity="center_vertical"
-                android:layout_margin="20dp"/>
+                android:layout_margin="10dp"/>
 
 
         </LinearLayout>

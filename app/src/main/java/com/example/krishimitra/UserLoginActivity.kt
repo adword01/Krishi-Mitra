@@ -83,6 +83,8 @@ class UserLoginActivity : AppCompatActivity() {
         // Check if login credentials exist in shared preferences
         val savedUsername = sharedPreferences.getString("username", null)
         val savedPassword = sharedPreferences.getString("password", null)
+        val savedemail = sharedPreferences.getString("email", null)
+
         if (savedUsername != null && savedPassword != null) {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)

@@ -3,6 +3,7 @@ package com.example.krishimitra.fragments
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.krishimitra.MapActivity
 import com.example.krishimitra.R
@@ -30,12 +32,14 @@ import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import java.util.*
 
 class GreetFragment : Fragment()  {
 
     private lateinit var binding : FragmentGreetBinding
-    private lateinit var phoneNumberWithoutCountryCode : String
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var auth : FirebaseAuth
     private lateinit var authName : String
@@ -44,6 +48,8 @@ class GreetFragment : Fragment()  {
     private lateinit var date : String
     private lateinit var authnumber : String
     private lateinit var time : String
+    private lateinit var messaging: FirebaseMessaging
+
     private lateinit var path : String
 
 
@@ -61,8 +67,12 @@ class GreetFragment : Fragment()  {
             startActivity(intent)
         }
 
+
+
         binding.addToDo.setOnClickListener {
-            showbottomsheet()
+            lifecycleScope.launch {
+                showbottomsheet()
+            }
         }
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -70,6 +80,20 @@ class GreetFragment : Fragment()  {
             .build()
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
         val account = GoogleSignIn.getLastSignedInAccount(requireActivity())
+
+        messaging = FirebaseMessaging.getInstance()
+        lifecycleScope.launch {
+            try {
+                val token = FirebaseMessaging.getInstance().token.await()
+                // Log and toast
+                Log.d(TAG, "FCM registration token: $token")
+
+//                Toast.makeText(requireContext(), "FCM registration token: $token", Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                Log.e(TAG, "Error getting FCM registration token", e)
+            }
+
+        }
 
 
         val sharedPreferences = requireContext().getSharedPreferences("USER_PREF", Context.MODE_PRIVATE)
@@ -178,7 +202,10 @@ class GreetFragment : Fragment()  {
 
        savebtn.setOnClickListener {
 
-            val description = view.findViewById<EditText>(R.id.etDescription).text.toString()
+           bottomSheetDialog.dismiss()
+           FirebaseMessaging.getInstance().subscribeToTopic("tasks")
+
+           val description = view.findViewById<EditText>(R.id.etDescription).text.toString()
 
             if (description.isNotBlank() ) {
                 val key = database.push().key // generate a new key for the task item

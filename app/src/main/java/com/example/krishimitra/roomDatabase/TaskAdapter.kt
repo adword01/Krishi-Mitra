@@ -27,6 +27,11 @@ class TaskAdapter( private var tasks: MutableList<TaskItem>,private var path : S
         holder.dateTextView.text = task.date
         holder.timeTextView.text = task.time
 
+        holder.moreBtn.setOnClickListener {
+            holder.btnDelete.visibility=View.VISIBLE
+            holder.moreBtn.visibility=View.INVISIBLE
+        }
+
         holder.btnDelete.setOnClickListener {
             val db = Firebase.firestore
             val docRef = db.collection(path).document(task.id)
@@ -38,6 +43,7 @@ class TaskAdapter( private var tasks: MutableList<TaskItem>,private var path : S
                     Log.w(TAG, "Error deleting document", e)
                 }
         }
+
     }
 
     override fun getItemCount(): Int {
@@ -53,6 +59,7 @@ class TaskAdapter( private var tasks: MutableList<TaskItem>,private var path : S
         val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
         val dateTextView: TextView = itemView.findViewById(R.id.datetxt)
         val timeTextView: TextView = itemView.findViewById(R.id.timetxt)
+        val moreBtn:ImageView=itemView.findViewById(R.id.more_btn)
         val btnDelete: ImageView = itemView.findViewById(R.id.deleteButton)
     }
 }

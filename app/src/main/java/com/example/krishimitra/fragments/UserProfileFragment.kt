@@ -88,6 +88,7 @@ class UserProfileFragment : Fragment() {
 
             editor.putString("username",null )
             editor.putString("password",null )
+            editor.putString("email",null)
             editor.apply()
 
 
