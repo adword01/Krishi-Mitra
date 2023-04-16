@@ -7,7 +7,7 @@ This solution is designed to provide farmers with crop recommendations based on 
 
 Krishi-Mitra-API is a FastAPI based implementation for the Krishi-Mitra project. 
 It provides endpoints for making predictions using the trained Random Forest Classifier model. 
-You can find the code and documentation for Krishi-Mitra-API in the [Krishi-Mitra-API repository](https://github.com/0xSushmanth/Krishi-Mitra-API).
+You can find the code and documentation for Krishi-Mitra-API in the [here](https://krishimitra-0102.ue.r.appspot.com/docs).
 
 
 ## DISCLAIMER ⚠️
