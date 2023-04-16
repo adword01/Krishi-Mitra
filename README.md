@@ -1,7 +1,7 @@
 <h1 align="center">  KrishiMitra API</h1>
 
 
-This repository is API implementation for [KRISHI MITRA-ML](https://github.com/0xSushmanth/Krishi-Mitra-ML) , predicts the suitable crop based on input data such as nitrogen (N), phosphorous (P), potassium (K) levels in soil, temperature, humidity, pH, and rainfall.
+This repository is API implementation for [KRISHI MITRA-ML](https://github.com/adword01/Krishi-Mitra/tree/ML) , predicts the suitable crop based on input data such as nitrogen (N), phosphorous (P), potassium (K) levels in soil, temperature, humidity, pH, and rainfall.
 
 ## Getting Started
 
@@ -37,14 +37,14 @@ flask --app application run
 ```
 ## Testing with Postman
 
-You can test the Flask API using Postman, a popular API client. Follow these steps:
+You can test the FASTAPI using Postman, a popular API client. Follow these steps:
 
-1. Start the Flask application by running the `application.py` script.
+1. Start the FASTAPI application by running the `uvicorn application:app --reload` script.
 2. Open Postman and create a new request.
-3. Set the HTTP method to POST and enter the endpoint URL of the Flask app's `/predict` endpoint (e.g., `http://127.0.0.1:5000/predict`).
+3. Set the HTTP method to POST and enter the endpoint URL of the FASTAPI `/predict` endpoint (e.g., `http://127.0.0.1:5000/predict`).
 4. Go to the "Body" tab in Postman, select "form-data" as the type of body, and enter the input data as key-value pairs.
-5. Click on the "Send" button to send the POST request to the Flask app.
-6. You should receive a JSON response from the Flask app, containing the predicted crop based on the input data.
+5. Click on the "Send" button to send the POST request.
+6. You should receive a JSON response from the API, containing the predicted crop based on the input data.
 
 ## Parameters to pass
   You need to enter following values to predict the crop: -
