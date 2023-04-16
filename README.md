@@ -60,12 +60,7 @@ Clone the project
  
 - Weather Api is implemented from [OpenWeather](https://openweathermap.org/api) 
 ## Screenshots
-
-
-## Demo
-
-
-
+refer to demo folder 
 
 ## DISCLAIMER ⚠️
 This is a POC(Proof of concept) kind-of project. The data used here comes up with no guarantee from the creator. So, don't use it for making farming decisions. If you do so, the creator is not responsible for anything. However, this project presents the idea that how we can use ML/DL into precision farming if developed at large scale and with authentic and verified data.
