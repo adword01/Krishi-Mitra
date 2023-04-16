@@ -9,7 +9,7 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -17,7 +17,6 @@
                 android:id="@+id/cropName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:gravity="center"
                 android:text="Crop"
                 android:textColor="@color/black"
@@ -31,48 +30,59 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.064" />
 
+
+            <ImageView
+                android:layout_marginTop="25dp"
+                android:id="@+id/cropImg"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cropName" />
+
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/dotpgbar"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cropImg"
                 app:layout_constraintBottom_toTopOf="@+id/closedialog"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cropName"
+                app:layout_constraintTop_toBottomOf="@+id/cropImg"
                 app:layout_constraintVertical_bias="1.0"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/dotsbar" />
 
             <TextView
-                android:layout_margin="10dp"
                 android:id="@+id/cropdescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="This is the crop description."
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:visibility="gone"
-                android:text="This is the crop description."
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cropName"
-                app:layout_constraintVertical_bias="0.091" />
+                app:layout_constraintTop_toBottomOf="@+id/cropImg"
+                app:layout_constraintVertical_bias="0.247" />
 
             <Button
                 android:id="@+id/closedialog"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="25dp"
                 android:background="@drawable/round_button"
                 android:text="close"
-                android:layout_marginTop="25dp"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cropdescription"
-                app:layout_constraintVertical_bias="0.099"
-                android:layout_marginBottom="25dp"/>
+                app:layout_constraintVertical_bias="0.276" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

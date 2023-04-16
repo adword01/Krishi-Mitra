@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
-
+                android:textColor="#056308"
                 android:inputType="numberDecimal" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -114,6 +114,7 @@
                 android:drawablePadding="8dp"
                 android:imeOptions="actionNext"
                 android:textColorHint="@color/black"
+                android:textColor="#056308"
                 android:inputType="numberDecimal" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -152,6 +153,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="8dp"
                 android:imeOptions="actionNext"
+                android:textColor="#056308"
                 android:inputType="numberDecimal" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -192,6 +194,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="8dp"
                 android:imeOptions="actionNext"
+                android:textColor="#056308"
                 android:inputType="numberDecimal" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -231,6 +234,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="8dp"
                 android:imeOptions="actionNext"
+                android:textColor="#056308"
                 android:inputType="numberDecimal" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -273,6 +277,7 @@
                 android:id="@+id/pH"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#056308"
                 android:drawablePadding="8dp"
                 android:inputType="numberDecimal" />
 
@@ -312,7 +317,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="8dp"
-                android:imeOptions="actionNext"
+                android:imeOptions="actionDone"
+                android:textColor="#056308"
                 android:inputType="numberDecimal" />
 
         </com.google.android.material.textfield.TextInputLayout>

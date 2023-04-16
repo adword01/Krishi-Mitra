@@ -43,6 +43,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.common.math.DoubleMath.roundToInt
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
@@ -544,8 +545,7 @@ class GreetFragment : Fragment()  {
 
             humidityValue.text=body.main.humidity.toString()+"%"
 
-            tempFValue.text=""+(k2c(body.main.temp).times(1.8)).plus(32)
-                .roundToInt()+"°"
+            tempFValue.text=""+k2c(body.main.temp)+"°"
 
            // citySearch.setText(body.name)
 
@@ -596,7 +596,6 @@ class GreetFragment : Fragment()  {
 
         binding.apply {
 
-            Toast.makeText(activity,id.toString(),Toast.LENGTH_SHORT).show()
 
             when (id) {
 

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -13,6 +14,8 @@ import com.airbnb.lottie.LottieAnimationView
 import com.example.krishimitra.R
 import com.example.krishimitra.databinding.FragmentPredictCropBinding
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -106,11 +109,28 @@ class PredictCrop : Fragment() {
                         val db = FirebaseDatabase.getInstance()
                         db.reference.child("crops").child("English").get().addOnSuccessListener {
                             if (it.exists()){
-                                hideProgressBar()
+
                                 val cropdescription = it.child(cropName).value
-                                dialog.findViewById<TextView>(R.id.cropdescription).visibility = View.VISIBLE
-                                dialog.findViewById<TextView>(R.id.cropdescription).setText(cropdescription.toString())
+
+                                val storageRef = FirebaseStorage.getInstance().reference.child("$cropName.png")
+
+                                storageRef.downloadUrl.addOnSuccessListener { uri ->
+                                    hideProgressBar()
+                                    Picasso.get().load(uri).into(dialog.findViewById<ImageView>(R.id.cropImg))
+                                    dialog.findViewById<TextView>(R.id.cropdescription).visibility = View.VISIBLE
+                                    dialog.findViewById<TextView>(R.id.cropdescription).setText(cropdescription.toString())
+                                }.addOnFailureListener {
+                                    // Handle any errors here
+                                    hideProgressBar()
+                                    Toast.makeText(requireContext(),"Failed to load image",Toast.LENGTH_SHORT).show()
+                                }
+
+
+
                             }
+
+
+
 
                         }
                     }
