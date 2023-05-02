@@ -32,6 +32,13 @@ class UserLoginActivity : AppCompatActivity() {
         val loginUsername = findViewById<TextView>(R.id.login_username)
         val loginPassword = findViewById<TextView>(R.id.login_password)
 
+        val strUser = intent.getStringExtra("username")
+        val strPassword = intent.getStringExtra("password")
+
+        loginUsername.text=strUser
+        loginPassword.text=strPassword
+
+
         logBtn.setOnClickListener {
             val usernameLogin: String = loginUsername.text.toString().trim()
             val passwordLogin: String = loginPassword.text.toString().trim()

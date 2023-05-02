@@ -148,7 +148,11 @@ class PredictCrop : Fragment() {
                                     "rainfall" to binding.rain.text.toString()
                                 )
 
-                                dbref.collection("cropsdata").document(authEmail).set(userData)
+                                val docId = dbref.collection("cropsdata").document().id
+
+//                                dbref.collection("cropsdata").collection(authEmail).document(docId).set(userData)
+                                dbref.collection("cropsdata").document(authEmail).collection("crops").document(docId).set(userData)
+
 
                                 val storageRef = FirebaseStorage.getInstance().reference.child("$cropName.png")
 
@@ -164,14 +168,7 @@ class PredictCrop : Fragment() {
                                     hideProgressBar()
                                     Toast.makeText(requireContext(),"Failed to load image",Toast.LENGTH_SHORT).show()
                                 }
-
-
-
                             }
-
-
-
-
                         }
                     }
 
@@ -182,10 +179,7 @@ class PredictCrop : Fragment() {
                     }
                 }
             }
-
-
-
-        }
+      }
         return binding.root
     }
 

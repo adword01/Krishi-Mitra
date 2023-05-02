@@ -2,12 +2,10 @@ package com.example.krishimitra
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.InputType
 import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.appcompat.app.AppCompatActivity
 import com.example.krishimitra.databinding.ActivityEditProfileBinding
 import com.example.krishimitra.models.User
 import com.google.firebase.auth.FirebaseAuth
@@ -46,9 +44,7 @@ class EditProfileActivity : AppCompatActivity() {
 
         }
 
-
-
-        binding.saveinfo.setOnClickListener {
+            binding.saveinfo.setOnClickListener {
             saveData()
         }
 

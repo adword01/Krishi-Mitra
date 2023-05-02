@@ -45,8 +45,10 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var gsc : GoogleSignInClient
     private lateinit var authEmail : String
 
-    private lateinit var sharedPreferences: SharedPreferences
+    private var isUserLoggedIn = false
     private lateinit var mProgressBar : ProgressBar
+
+
 
     companion object {
         private const val RC_SIGN_IN = 123
@@ -61,7 +63,14 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        sharedPreferences = getSharedPreferences("USER_PREF", MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("USER_PREF", MODE_PRIVATE)
+        isUserLoggedIn = sharedPreferences.getBoolean("isUserLoggedIn", false)
+
+        if (isUserLoggedIn) {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
         auth = FirebaseAuth.getInstance()
@@ -70,9 +79,19 @@ class LoginActivity : AppCompatActivity() {
 
 
         binding.otpbtn.setOnClickListener {
+
+            val sharedPreferences1 = getSharedPreferences("USER_PRE", MODE_PRIVATE)
+            isUserLoggedIn = sharedPreferences1.getBoolean("isUserLoggedIn", false)
+
+            if (isUserLoggedIn) {
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+                finish()
+            }else{
             val intent=Intent(this,UserLoginActivity::class.java)
             startActivity(intent)
             finish()
+        }
         }
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -124,19 +143,13 @@ class LoginActivity : AppCompatActivity() {
                 authEmail = auth.currentUser!!.email.toString()
                 val db = Firebase.firestore
                 val docRef = db.collection("User").document(authEmail)
-//                val intent = Intent(this,HomeActivity::class.java)
-//                intent.putExtra("email", account.email)
-//                intent.putExtra("name", account.displayName)
-
-
-                    sharedPreferences=applicationContext.getSharedPreferences("pref", Context.MODE_PRIVATE)
-                    val editor=sharedPreferences!!.edit()
-                    editor.putBoolean("isFirstTimeRun",true)
-                    editor.apply()
+                val intent = Intent(this,HomeActivity::class.java)
+                intent.putExtra("email", account.email)
+                intent.putExtra("name", account.displayName)
 
 //
-//                startActivity(intent)
-//                finish()
+                startActivity(intent)
+                finish()
 
                 docRef.get()
                     .addOnSuccessListener { documentSnapshot ->
@@ -144,6 +157,12 @@ class LoginActivity : AppCompatActivity() {
                             val email = documentSnapshot.getString("email")
                             if (email == authEmail){
                                 val intent = Intent(this,HomeActivity::class.java)
+
+                                val sharedPreferences = getSharedPreferences("USER_PREF", MODE_PRIVATE)
+                                val editor = sharedPreferences.edit()
+                                editor.putBoolean("isUserLoggedIn", true)
+                                editor.apply()
+
                                 intent.putExtra("email", account.email)
                                 intent.putExtra("name", account.displayName)
                                 startActivity(intent)
@@ -169,13 +188,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
-
-
-
-
-
-
-
 
         }
 

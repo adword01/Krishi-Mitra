@@ -3,7 +3,6 @@ package com.example.krishimitra.fragments
 import android.Manifest
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
@@ -23,12 +22,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.location.LocationManagerCompat.getCurrentLocation
-import androidx.core.location.LocationManagerCompat.isLocationEnabled
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,7 +48,6 @@ import com.sunayanpradhan.weatherapptutorial.Models.WeatherModel
 import com.sunayanpradhan.weatherapptutorial.Utilites.ApiUtilities
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
-import org.checkerframework.checker.units.qual.s
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

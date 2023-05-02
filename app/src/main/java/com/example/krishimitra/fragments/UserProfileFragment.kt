@@ -2,40 +2,37 @@ package com.example.krishimitra.fragments
 
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.krishimitra.EditProfileActivity
 import com.example.krishimitra.LoginActivity
 import com.example.krishimitra.R
-import com.example.krishimitra.databinding.FragmentGreetBinding
 import com.example.krishimitra.databinding.FragmentUserProfileBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
-import kotlin.concurrent.fixedRateTimer
 
 class UserProfileFragment : Fragment() {
 
-    private lateinit var Editbutton : Button
+//    private lateinit var Editbutton : Button
     private lateinit var binding : FragmentUserProfileBinding
     private lateinit var auth : FirebaseAuth
     private lateinit var authName : String
     private lateinit var authEmail : String
     private lateinit var authnumber : String
-    private lateinit var phoneNumberWithoutCountryCode : String
+//    private lateinit var phoneNumberWithoutCountryCode : String
     private lateinit var googleSignInClient: GoogleSignInClient
     var sharedPreferences: SharedPreferences?=null
 
@@ -84,15 +81,24 @@ class UserProfileFragment : Fragment() {
         binding.logoutbtn.setOnClickListener {
 
 
+            val sharedPreferences1 = requireActivity().getSharedPreferences("USER_PRE", MODE_PRIVATE)
+            val editor1 = sharedPreferences1.edit()
+            editor1.putBoolean("isUserLoggedIn", false)
+
+
+            val sharedPreferences = requireActivity().getSharedPreferences("USER_PREF", MODE_PRIVATE)
             val editor = sharedPreferences.edit()
+            editor.putBoolean("isUserLoggedIn", false)
+//            editor.apply()
+
+//            val editor = sharedPreferences.edit()
 
             editor.putString("username",null )
             editor.putString("password",null )
             editor.putString("email",null)
             editor.apply()
 
-
-            restorePrefData()
+//            restorePrefData()
 
 
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -113,10 +119,10 @@ class UserProfileFragment : Fragment() {
         return binding.root
     }
 
-    private fun restorePrefData() :Boolean{
-        sharedPreferences=requireContext().getSharedPreferences("pref",Context.MODE_PRIVATE)
-        return sharedPreferences!!.getBoolean("isFirstTimeRun",false)
-    }
+//    private fun restorePrefData() :Boolean{
+//        sharedPreferences=requireContext().getSharedPreferences("pref",Context.MODE_PRIVATE)
+//        return sharedPreferences!!.getBoolean("isFirstTimeRun",false)
+//    }
 
 
     private fun EmailData(){
