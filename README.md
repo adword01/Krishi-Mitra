@@ -22,9 +22,9 @@ Krishi-Mitra is an Android app made in Kotlin that can help farmers predict the 
 
 ## Tech Stack
 - Git,Github
-- Kotlin,Firebase,Realtime Database,Firestore,RetroFit,Firebase Storage,OkHTTP
-- Machine Learning,Numpy,Pandas,Scikit-Learn,Random Forest
-- FastAPI,GCP AMD instance,
+- Kotlin, Firebase, Realtime Database, Firestore, RetroFit, Firebase Storage, OkHTTP
+- Machine Learning, Numpy, Pandas, Scikit-Learn, Random Forest
+- FastAPI, GCP AMD instance,
 
 ## Requirements
 - Android Studio 4.0 or later.
@@ -60,12 +60,7 @@ Clone the project
  
 - Weather Api is implemented from [OpenWeather](https://openweathermap.org/api) 
 ## Screenshots
-
-
-## Demo
-
-
-
+refer to demo folder 
 
 ## DISCLAIMER ⚠️
 This is a POC(Proof of concept) kind-of project. The data used here comes up with no guarantee from the creator. So, don't use it for making farming decisions. If you do so, the creator is not responsible for anything. However, this project presents the idea that how we can use ML/DL into precision farming if developed at large scale and with authentic and verified data.
