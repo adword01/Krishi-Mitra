@@ -104,12 +104,27 @@ class SignUpActivity : AppCompatActivity() {
         )
 
         db.child("Users").child(binding.usernameTxt.text.toString()).setValue(userData)
+            .addOnSuccessListener {
+                Toast.makeText(this,"Details added successfully",Toast.LENGTH_SHORT).show()
+//                intent.putExtra("username", binding.usernameTxt.text.toString())
+//                intent.putExtra("password", binding.passwordTxt.text.toString())
+                val intent = Intent(this,HomeActivity::class.java)
+//                FirebaseMessaging.getInstance().subscribeToTopic("tasks")
+
+                startActivity(intent)
+                finish()
+            }.addOnFailureListener {err ->
+                Toast.makeText(this,"Error ${err.message}",Toast.LENGTH_SHORT).show()
+
+            }
 
         database.collection("User").document(binding.emailTxt.text.toString()).set(userData)
             .addOnSuccessListener {
-                Toast.makeText(this,"Details added successfully",Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this,"Details added successfully",Toast.LENGTH_SHORT).show()
+//                intent.putExtra("username", binding.usernameTxt.text.toString())
+//                intent.putExtra("password", binding.passwordTxt.text.toString())
                 val intent = Intent(this,HomeActivity::class.java)
-                FirebaseMessaging.getInstance().subscribeToTopic("tasks")
+//                FirebaseMessaging.getInstance().subscribeToTopic("tasks")
 
                 startActivity(intent)
                 finish()
