@@ -76,7 +76,7 @@ class PredictCrop : Fragment() {
             auth = FirebaseAuth.getInstance()
             authName = auth.currentUser!!.displayName.toString()
             authEmail = auth.currentUser!!.email.toString()
-            Toast.makeText(activity,authName,Toast.LENGTH_SHORT).show()
+           // Toast.makeText(activity,authName,Toast.LENGTH_SHORT).show()
 
         }else{
 

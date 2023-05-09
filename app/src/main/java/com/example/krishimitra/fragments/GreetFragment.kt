@@ -7,6 +7,8 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Address
+import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.os.Build
@@ -57,6 +59,7 @@ import java.time.Instant
 import java.time.ZoneId
 import java.util.*
 import kotlin.math.roundToInt
+
 
 class GreetFragment : Fragment()  {
 
@@ -430,6 +433,7 @@ class GreetFragment : Fragment()  {
 
     }
 
+
     private fun getCurrentLocation(){
 
         if (checkPermissions()){
@@ -460,6 +464,7 @@ class GreetFragment : Fragment()  {
                                 location.latitude.toString(),
                                 location.longitude.toString()
                             )
+                            getCompleteAddressString(location.latitude.toDouble(),location.longitude.toDouble())
 
 
                         }
@@ -484,6 +489,36 @@ class GreetFragment : Fragment()  {
         }
 
 
+    }
+
+    private fun getCompleteAddressString(LATITUDE: Double, LONGITUDE: Double): String? {
+        var strAdd = ""
+        var cityAndCountry = ""
+        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+        try {
+            val addresses: List<Address>? = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1)
+            if (addresses != null) {
+                val returnedAddress: Address = addresses[0]
+                val cityName: String = returnedAddress.locality
+                val countryName: String = returnedAddress.countryName
+                val stateName : String = returnedAddress.adminArea
+                cityAndCountry = "$cityName, $stateName, $countryName"
+                val strReturnedAddress = StringBuilder("")
+                for (i in 0..returnedAddress.getMaxAddressLineIndex()) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                }
+                strAdd = strReturnedAddress.toString()
+                Toast.makeText(activity,cityAndCountry,Toast.LENGTH_SHORT).show()
+                Log.w("My Current loction address", strReturnedAddress.toString())
+            } else {
+                Toast.makeText(activity,"Error",Toast.LENGTH_SHORT).show()
+                Log.w("My Current loction address", "No Address returned!")
+            }
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+            Log.w("My Current loction address", "Canont get Address!")
+        }
+        return strAdd
     }
 
     private fun requestPermission() {
@@ -538,7 +573,7 @@ class GreetFragment : Fragment()  {
 
             val currentDate= SimpleDateFormat("dd/MM/yyyy hh:mm").format(Date())
 
-            temp.text=""+k2c(body?.main?.temp!!)+"°"
+            temp.text=""+k2c(body?.main?.temp!!)+"°C"
             weatherTitle.text=body.weather[0].main
             sunriseValue.text=ts2td(body.sys.sunrise.toLong())
             sunsetValue.text=ts2td(body.sys.sunset.toLong())
@@ -546,7 +581,7 @@ class GreetFragment : Fragment()  {
             humidityValue.text=body.main.humidity.toString()+"%"
             tempFValue.text=""+(k2c(body.main.temp).times(1.8)).plus(32)
                 .roundToInt()+"°"
-            feelsLike.text= ""+k2c(body.main.feels_like)+"°"
+            feelsLike.text= ""+k2c(body.main.feels_like)+"°C"
             windValue.text=body.wind.speed.toString()+"m/s" }
         updateUI(body.weather[0].id)
     }
