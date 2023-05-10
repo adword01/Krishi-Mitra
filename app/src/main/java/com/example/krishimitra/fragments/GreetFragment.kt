@@ -140,6 +140,9 @@ class GreetFragment : Fragment()  {
         val username = sharedPreferences.getString("username", null)
         val email = sharedPreferences.getString("email","email")
 
+//        val us=Intent.getIntent("username")
+//        binding.username.text = us.toString()
+
         if (username == null){
             auth = FirebaseAuth.getInstance()
             authName = auth.currentUser!!.displayName.toString()
@@ -377,6 +380,7 @@ class GreetFragment : Fragment()  {
     private fun getCardData(cropPath: String){
         val dbRef = Firebase.firestore
         dbRef.collection("cropsdata").document(cropPath).get()
+//        dbRef.collection("cropsdata").document(authEmail).collection("crops").document(docId).collection(userData).get()
             .addOnSuccessListener {documentSnapshot ->
                 if (documentSnapshot.exists()){
                     val crop = documentSnapshot.getString("Crop Name")

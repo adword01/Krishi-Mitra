@@ -40,7 +40,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
             >
@@ -60,7 +60,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
             app:passwordToggleEnabled="true"
@@ -80,19 +80,37 @@
             android:layout_height="50dp"
             android:text="LogIn"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"/>
+            android:layout_marginTop="25dp"/>
+
+        <com.google.android.material.button.MaterialButton
+        android:id="@+id/signIn"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:textSize="20dp"
+        app:icon="@drawable/google"
+        app:iconSize="20dp"
+        app:iconGravity="start"
+        android:text="Sign IN"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otpbtn"
+        app:layout_constraintVertical_bias="0.694"/>
+
 
         <TextView
             android:id="@+id/register_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
             android:layout_marginBottom="5dp"
             android:text="New User, Register here."
             android:textColor="#7286D3"
             android:textSize="20sp"
             android:textStyle="bold" />
+
 
     </LinearLayout>
 

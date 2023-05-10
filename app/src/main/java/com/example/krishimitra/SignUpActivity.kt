@@ -1,20 +1,15 @@
 package com.example.krishimitra
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.krishimitra.databinding.ActivitySignUpBinding
-import com.example.krishimitra.databinding.ActivityUserLoginBinding
 import com.example.krishimitra.models.User
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.messaging.FirebaseMessaging
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -28,15 +23,15 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val loginTxt = findViewById<TextView>(R.id.login_txt)
-        loginTxt.setOnClickListener {
+//        val loginTxt = findViewById<TextView>(R.id.login_txt)
+        binding.loginTxt.setOnClickListener {
             val intent = Intent(this,UserLoginActivity::class.java)
             startActivity(intent)
         }
 
 
-        val registerBtn = findViewById<Button>(R.id.register_btn)
-        registerBtn.setOnClickListener {
+//        val registerBtn = findViewById<Button>(R.id.register_btn)
+        binding.registerBtn.setOnClickListener {
 
 
             saveData()
@@ -123,7 +118,7 @@ class SignUpActivity : AppCompatActivity() {
 //                Toast.makeText(this,"Details added successfully",Toast.LENGTH_SHORT).show()
 //                intent.putExtra("username", binding.usernameTxt.text.toString())
 //                intent.putExtra("password", binding.passwordTxt.text.toString())
-                val intent = Intent(this,HomeActivity::class.java)
+                val intent = Intent(this,UserLoginActivity::class.java)
 //                FirebaseMessaging.getInstance().subscribeToTopic("tasks")
 
                 startActivity(intent)

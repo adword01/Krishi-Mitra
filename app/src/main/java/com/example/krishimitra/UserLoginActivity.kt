@@ -1,13 +1,25 @@
 package com.example.krishimitra
 
+import android.app.Activity
+import android.content.ContentValues
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.krishimitra.databinding.ActivityUserLoginBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.ktx.firestore
@@ -18,6 +30,11 @@ class UserLoginActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var binding:ActivityUserLoginBinding
+    private lateinit var gsc : GoogleSignInClient
+    private lateinit var authEmail : String
+
+    private lateinit var auth : FirebaseAuth
+    private var currentuser : FirebaseUser?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +54,21 @@ class UserLoginActivity : AppCompatActivity() {
 
         loginUsername.text=strUser
         loginPassword.text=strPassword
+
+        auth = FirebaseAuth.getInstance()
+        currentuser = auth.currentUser
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        gsc = GoogleSignIn.getClient(this, gso)
+
+        binding.signIn.setOnClickListener {
+            signInGoogle()
+
+        }
 
 
         logBtn.setOnClickListener {
@@ -99,90 +131,79 @@ class UserLoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun signInGoogle() {
+        val signInIntent = gsc.signInIntent
+        launcher.launch(signInIntent)
+    }
+    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            result ->
+        if (result.resultCode == Activity.RESULT_OK){
 
+            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+            handleResults(task)
+        }
+    }
+    private fun handleResults(task: Task<GoogleSignInAccount>) {
+        if (task.isSuccessful){
+            val account : GoogleSignInAccount? = task.result
+            if (account != null){
+                updateUI(account)
+            }
+        }else{
+            Toast.makeText(this, task.exception.toString() , Toast.LENGTH_SHORT).show()
+        }
+    }
+    private fun updateUI(account: GoogleSignInAccount) {
+        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+        auth.signInWithCredential(credential).addOnCompleteListener {
+            if (it.isSuccessful) {
+                authEmail = auth.currentUser!!.email.toString()
+                val db = Firebase.firestore
+                val docRef = db.collection("User").document(authEmail)
+                val intent = Intent(this,HomeActivity::class.java)
+                intent.putExtra("email", account.email)
+                intent.putExtra("name", account.displayName)
 
+//
+                startActivity(intent)
+                finish()
 
+                docRef.get()
+                    .addOnSuccessListener { documentSnapshot ->
+                        if (documentSnapshot.exists()) {
+                            val email = documentSnapshot.getString("email")
+                            if (email == authEmail){
+                                val intent = Intent(this,HomeActivity::class.java)
 
+                                val sharedPreferences = getSharedPreferences("USER_PREF", MODE_PRIVATE)
+                                val editor = sharedPreferences.edit()
+                                editor.putBoolean("isUserLoggedIn", true)
+                                editor.apply()
 
+                                intent.putExtra("email", account.email)
+                                intent.putExtra("name", account.displayName)
+                                startActivity(intent)
+                                finish()
+                            }
+                        } else {
+                            val intent = Intent(this, SignUpActivity::class.java)
+                            //  EmailData()
+                            intent.putExtra("email", account.email)
+                            intent.putExtra("name", account.displayName)
+                            startActivity(intent)
+                            Log.d("Success","Successful")
+                            Log.d(ContentValues.TAG, "Document does not exist")
+                            finish()
+                        }
+                    }
 
+            } else {
+                Log.d("Error",it.exception.toString())
+                Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
 
+            }
+        }
 
-
-
-
-
-
-//    private lateinit var binding: ActivityLoginBinding
-//    private lateinit var database: DatabaseReference
-//    private lateinit var videoView: VideoView
-//
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-////
-////        binding= ActivityLoginBinding.inflate(layoutInflater)
-////        setContentView(binding.root)
-//        setContentView(R.layout.activity_login)
-//
-//
-//
-//
-////        val email_login = findViewById<EditText>(R.id.login_username)
-////        val password_login = findViewById<EditText>(R.id.login_password)
-////
-//        val logBtn = findViewById<Button>(R.id.log_btn)
-//
-//        val loginUsername = findViewById<TextView>(R.id.login_username)
-//        val loginPassword = findViewById<TextView>(R.id.login_password)
-//
-//        logBtn.setOnClickListener {
-//            val usernamelogin:String=loginUsername.text.toString().trim()
-//            val passwordlogin:String=loginPassword.text.toString().trim()
-//
-//            if (usernamelogin.isNotEmpty()){
-//                database=FirebaseDatabase.getInstance().getReference("Users")
-//                database.child(usernamelogin).get().addOnSuccessListener {
-//
-//                    if(it.exists()){
-//                        var username = it.child("username").value
-//                        var password = it.child("password").value
-//
-//                        if(password==passwordlogin){
-//                            Toast.makeText(this,"Welcome to Brain Academy",Toast.LENGTH_LONG).show()
-//                            val intent =Intent(this,HomeActivity::class.java)
-//                            startActivity(intent)
-//                            this.finish()
-//
-//
-//                        }else{
-//                            Toast.makeText(this, "Password is incorrect", Toast.LENGTH_SHORT).show()
-//                        }
-//
-//                    }else{
-//                        Toast.makeText(this,"User does not exist",Toast.LENGTH_SHORT).show()
-//                        val intent = Intent(this,SignUp::class.java)
-//                        startActivity(intent)
-//                    }
-//                }
-//            }else{
-//                Toast.makeText(this,"Please enter the username",Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//
-//
-//
-//
-//        val register_txt = findViewById<TextView>(R.id.register_txt)
-//        register_txt.setOnClickListener {
-//            val intent = Intent(this, SignUp::class.java)
-//            startActivity(intent)
-//        }
-//
-//
-////        binding.fab.setOnClickListener { view ->
-////            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-////                .setAction("Action", null).show()
-////        }
-//    }
+    }
 
 }

@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.example.krishimitra.EditProfileActivity
 import com.example.krishimitra.LoginActivity
 import com.example.krishimitra.R
+import com.example.krishimitra.UserLoginActivity
 import com.example.krishimitra.databinding.FragmentUserProfileBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -108,7 +109,7 @@ class UserProfileFragment : Fragment() {
             val gsc = GoogleSignIn.getClient(requireActivity(),gso)
             gsc.signOut()
             auth.signOut()
-            val intent = Intent(activity,LoginActivity::class.java)
+            val intent = Intent(activity,UserLoginActivity::class.java)
             startActivity(intent)
             activity?.finish()
         }
