@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.krishimitra.databinding.ActivitySignUpBinding
 import com.example.krishimitra.models.User
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.ktx.firestore
@@ -15,6 +16,9 @@ class SignUpActivity : AppCompatActivity() {
 
     private lateinit var database : DatabaseReference
     private lateinit var binding:ActivitySignUpBinding
+    private lateinit var auth : FirebaseAuth
+    private lateinit var authEmail : String
+    private lateinit var authName : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        setContentView(R.layout.activity_sign_up)
@@ -22,6 +26,30 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        auth = FirebaseAuth.getInstance()
+        auth = FirebaseAuth.getInstance()
+        authEmail = intent.getStringExtra("Gemail").toString()
+
+        if (authEmail.isEmpty()){
+          startActivity(Intent(this,HomeActivity::class.java))
+        }else{
+            authEmail = auth.currentUser!!.email.toString()
+            authName = auth.currentUser!!.displayName.toString()
+            binding.emailTxt.setText(authEmail)
+            binding.emailTxt.isEnabled = false
+            binding.nameTxt.setText(authName)
+            binding.nameTxt.isEnabled = false
+        }
+//        if(auth.currentUser != null){
+//            startActivity(Intent(this,HomeActivity::class.java))
+//        }else{
+//            authEmail = auth.currentUser!!.email.toString()
+//            authName = auth.currentUser!!.displayName.toString()
+//            binding.emailTxt.setText(authEmail)
+//            binding.emailTxt.isEnabled = false
+//            binding.nameTxt.setText(authName)
+//            binding.nameTxt.isEnabled = false
+//        }
 
 //        val loginTxt = findViewById<TextView>(R.id.login_txt)
         binding.loginTxt.setOnClickListener {
@@ -32,8 +60,6 @@ class SignUpActivity : AppCompatActivity() {
 
 //        val registerBtn = findViewById<Button>(R.id.register_btn)
         binding.registerBtn.setOnClickListener {
-
-
             saveData()
         }
 
@@ -118,11 +144,12 @@ class SignUpActivity : AppCompatActivity() {
 //                Toast.makeText(this,"Details added successfully",Toast.LENGTH_SHORT).show()
 //                intent.putExtra("username", binding.usernameTxt.text.toString())
 //                intent.putExtra("password", binding.passwordTxt.text.toString())
-                val intent = Intent(this,UserLoginActivity::class.java)
+ //               val intent = Intent(this,UserLoginActivity::class.java)
 //                FirebaseMessaging.getInstance().subscribeToTopic("tasks")
 
-                startActivity(intent)
-                finish()
+//                startActivity(intent)
+//                finish()
+                Toast.makeText(this,"User created successfully",Toast.LENGTH_SHORT).show()
             }.addOnFailureListener {err ->
                 Toast.makeText(this,"Error ${err.message}",Toast.LENGTH_SHORT).show()
 

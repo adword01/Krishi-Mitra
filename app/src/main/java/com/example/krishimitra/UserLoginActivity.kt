@@ -67,7 +67,6 @@ class UserLoginActivity : AppCompatActivity() {
 
         binding.signIn.setOnClickListener {
             signInGoogle()
-
         }
 
 
@@ -188,8 +187,8 @@ class UserLoginActivity : AppCompatActivity() {
                         } else {
                             val intent = Intent(this, SignUpActivity::class.java)
                             //  EmailData()
-                            intent.putExtra("email", account.email)
-                            intent.putExtra("name", account.displayName)
+                            intent.putExtra("Gemail", account.email)
+                            intent.putExtra("Gname", account.displayName)
                             startActivity(intent)
                             Log.d("Success","Successful")
                             Log.d(ContentValues.TAG, "Document does not exist")
