@@ -14,6 +14,7 @@ import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.provider.UserDictionary
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +30,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.krishimitra.HomeActivity
 import com.example.krishimitra.R
+import com.example.krishimitra.UserLoginActivity
 import com.example.krishimitra.databinding.FragmentGreetBinding
 import com.example.krishimitra.models.TaskItem
 import com.example.krishimitra.roomDatabase.TaskAdapter
