@@ -12,9 +12,9 @@ import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.os.Build
+import com.example.krishimitra.R
 import android.os.Bundle
 import android.provider.Settings
-import android.provider.UserDictionary
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -26,16 +26,17 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.krishimitra.HomeActivity
-import com.example.krishimitra.R
-import com.example.krishimitra.UserLoginActivity
+import com.example.krishimitra.ViewMoreActivity
 import com.example.krishimitra.databinding.FragmentGreetBinding
 import com.example.krishimitra.models.TaskItem
 import com.example.krishimitra.roomDatabase.TaskAdapter
+import com.example.krishimitra.scheduleAlarm
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -64,7 +65,7 @@ import java.util.*
 import kotlin.math.roundToInt
 
 
-class GreetFragment : Fragment()  {
+class GreetFragment :  Fragment() {
 
     private lateinit var binding : FragmentGreetBinding
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -97,11 +98,15 @@ class GreetFragment : Fragment()  {
     ): View? {
         binding = FragmentGreetBinding.inflate(inflater,container,false)
 
-        val view = inflater.inflate(R.layout.fragment_greet, container, false)
         database = Firebase.database.reference
 
         fusedLocationProvider= LocationServices.getFusedLocationProviderClient(requireContext())
         getCurrentLocation()
+
+        val calendar = Calendar.getInstance()
+        calendar.set(2023, Calendar.MAY, 12, 20, 45, 0)
+
+        scheduleAlarm(requireContext(), calendar)
 
         binding.currentLocation.setOnClickListener {
 
@@ -109,7 +114,9 @@ class GreetFragment : Fragment()  {
 
         }
 
-
+        binding.viewmorebtn.setOnClickListener {
+            startActivity(Intent(requireContext(),ViewMoreActivity::class.java))
+        }
 
 
         binding.addToDo.setOnClickListener {
@@ -382,11 +389,11 @@ class GreetFragment : Fragment()  {
 
     private fun getCardData(cropPath: String){
         val dbRef = Firebase.firestore
-        dbRef.collection("cropsdata").document(cropPath).get()
+        dbRef.collection("recent").document(cropPath).get()
 //        dbRef.collection("cropsdata").document(authEmail).collection("crops").document(docId).collection(userData).get()
             .addOnSuccessListener {documentSnapshot ->
                 if (documentSnapshot.exists()){
-                    val crop = documentSnapshot.getString("Crop Name")
+                    val crop = documentSnapshot.getString("cropName")
                     val temp = documentSnapshot.getString("temperature")
                     val n = documentSnapshot.getString("N")
                     val p = documentSnapshot.getString("P")
@@ -501,9 +508,9 @@ class GreetFragment : Fragment()  {
     private fun getCompleteAddressString(LATITUDE: Double, LONGITUDE: Double): String? {
         var strAdd = ""
         var cityAndCountry = ""
-        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+        val geocoder = context?.let { Geocoder(it, Locale.getDefault()) }
         try {
-            val addresses: List<Address>? = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1)
+            val addresses: List<Address>? = geocoder?.getFromLocation(LATITUDE, LONGITUDE, 1)
             if (addresses != null) {
                 val returnedAddress: Address = addresses[0]
                 val cityName: String = returnedAddress.locality

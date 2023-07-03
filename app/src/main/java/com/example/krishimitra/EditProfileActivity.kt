@@ -28,6 +28,7 @@ class EditProfileActivity : AppCompatActivity() {
         val sharedPreferences =getSharedPreferences("USER_PREF", Context.MODE_PRIVATE)
         val searchvalue = sharedPreferences.getString("email", null)
 
+        auth = FirebaseAuth.getInstance()
 
 
         if(searchvalue == null){

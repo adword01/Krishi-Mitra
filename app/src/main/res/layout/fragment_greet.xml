@@ -108,7 +108,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="70dp"
             android:scrollbars="none">
 
         <LinearLayout
@@ -677,6 +677,18 @@
 
 
             </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:layout_gravity="end"
+                android:paddingEnd="32dp"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/rain"
+                android:id="@+id/viewmorebtn"
+                android:text="ViewMore>>>>>"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
         </LinearLayout>
 
 

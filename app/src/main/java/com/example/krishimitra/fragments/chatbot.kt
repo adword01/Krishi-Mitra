@@ -12,6 +12,9 @@ import com.airbnb.lottie.LottieAnimationView
 import com.example.krishimitra.databinding.FragmentChatbotBinding
 import com.example.krishimitra.models.chatMessage
 import com.example.krishimitra.roomDatabase.ChatAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -84,63 +87,108 @@ class chatbot : Fragment() {
 
 
     fun getResponse(question: String, callback: (String) -> Unit) {
-        val client = OkHttpClient.Builder()
-            .connectTimeout(60, TimeUnit.SECONDS) // Increase the timeout here (e.g., 30 seconds)
+//        val client = OkHttpClient.Builder()
+//            .connectTimeout(60, TimeUnit.SECONDS) // Increase the timeout here (e.g., 30 seconds)
+//            .readTimeout(60, TimeUnit.SECONDS)
+//            .writeTimeout(60, TimeUnit.SECONDS)
+//            .build()
+        GlobalScope.launch(Dispatchers.IO) {
+            val client = OkHttpClient.Builder()
+                .connectTimeout(60, TimeUnit.SECONDS) // Increase the timeout here (e.g., 30 seconds)
             .readTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
             .build()
 
-        val mediaType = "application/json".toMediaTypeOrNull()
-        val body = RequestBody.create(mediaType, """
-        {
-            "model": "gpt-3.5-turbo",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "$question"
+            val mediaType = "application/json".toMediaTypeOrNull()
+            val body = RequestBody.create(mediaType, "{\n    \"question\": \"$question\"\n}")
+            val request = Request.Builder()
+                .url("https://simple-chatgpt-api.p.rapidapi.com/ask")
+                .post(body)
+                .addHeader("content-type", "application/json")
+                .addHeader("X-RapidAPI-Key", "6d81e91983msha29f724ed180833p1c98a4jsnb9dddd5f4933")
+                .addHeader("X-RapidAPI-Host", "simple-chatgpt-api.p.rapidapi.com")
+                .build()
+
+          //  val response = client.newCall(request).execute()
+
+            client.newCall(request).enqueue(object : Callback{
+                override fun onFailure(call: Call, e: IOException) {
+                    callback("Error $e")
                 }
-            ]
-        }
-    """.trimIndent())
 
-        val request = Request.Builder()
-            .url("https://openai80.p.rapidapi.com/chat/completions")
-            .post(body)
-            .addHeader("content-type", "application/json")
-            .addHeader("X-RapidAPI-Key", "763c84b9admshace7becf539ab4ap135252jsne68b75ab77ad")
-            .addHeader("X-RapidAPI-Host", "openai80.p.rapidapi.com")
-            .build()
-
-        client.newCall(request).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                callback("Error: ${e.message}")
-            }
-
-                        override fun onResponse(call: Call, response: Response) {
-                val responseBody = response.body?.string()
-                if (responseBody != null) {
-                    val jsonObject = JSONObject(responseBody)
-                    val choices = jsonObject.getJSONArray("choices")
-                    if (choices.length() > 0) {
-                        val contentList = mutableListOf<String>()
-                        for (i in 0 until choices.length()) {
-                            val choice = choices.getJSONObject(i)
-                            val message = choice.getJSONObject("message")
-                            val content = message.getString("content")
-                            contentList.add(content)
+                override fun onResponse(call: Call, response: Response) {
+                    val responseBody = response.body?.string() // Obtain the response body as a string
+                    if (responseBody != null) {
+                        try {
+                            val jsonObject = JSONObject(responseBody)
+                            val answer = jsonObject.getString("answer")
+                            callback(answer)
+                            Log.d("response", responseBody)
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
                         }
-                        val joinedContent = contentList.joinToString("\n")
-                        callback(joinedContent)
-                    } else {
-                        callback("No response received")
                     }
-                } else {
-                    callback("Empty response")
                 }
-            }
 
 
-        })
+            })
+            // Process the response on the main thread if needed
+//            launch(Dispatchers.Main) {
+//                callback(response.toString())
+//            }
+        }
+
+//        val mediaType = "application/json".toMediaTypeOrNull()
+//        val body = RequestBody.create(mediaType, """
+//        {
+//            "model": "gpt-3.5-turbo",
+//            "messages": [
+//                {
+//                    "role": "user",
+//                    "content": "$question"
+//                }
+//            ]
+//        }
+//    """.trimIndent())
+//
+//        val request = Request.Builder()
+//            .url("https://openai80.p.rapidapi.com/chat/completions")
+//            .post(body)
+//            .addHeader("content-type", "application/json")
+//            .addHeader("X-RapidAPI-Key", "763c84b9admshace7becf539ab4ap135252jsne68b75ab77ad")
+//            .addHeader("X-RapidAPI-Host", "openai80.p.rapidapi.com")
+//            .build()
+//
+//        client.newCall(request).enqueue(object : Callback {
+//            override fun onFailure(call: Call, e: IOException) {
+//                callback("Error: ${e.message}")
+//            }
+//
+//                        override fun onResponse(call: Call, response: Response) {
+//                val responseBody = response.body?.string()
+//                if (responseBody != null) {
+//                    val jsonObject = JSONObject(responseBody)
+//                    val choices = jsonObject.getJSONArray("choices")
+//                    if (choices.length() > 0) {
+//                        val contentList = mutableListOf<String>()
+//                        for (i in 0 until choices.length()) {
+//                            val choice = choices.getJSONObject(i)
+//                            val message = choice.getJSONObject("message")
+//                            val content = message.getString("content")
+//                            contentList.add(content)
+//                        }
+//                        val joinedContent = contentList.joinToString("\n")
+//                        callback(joinedContent)
+//                    } else {
+//                        callback("No response received")
+//                    }
+//                } else {
+//                    callback("Empty response")
+//                }
+//            }
+//
+//
+//        })
     }
 
 

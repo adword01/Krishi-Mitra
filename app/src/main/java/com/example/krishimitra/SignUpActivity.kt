@@ -1,9 +1,11 @@
 package com.example.krishimitra
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.krishimitra.databinding.ActivitySignUpBinding
 import com.example.krishimitra.models.User
 import com.google.firebase.auth.FirebaseAuth
@@ -29,17 +31,21 @@ class SignUpActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         auth = FirebaseAuth.getInstance()
         authEmail = intent.getStringExtra("Gemail").toString()
+        val sharedPreferences = getSharedPreferences("USER_PREF", Context.MODE_PRIVATE)
+        val username = sharedPreferences.getString("username", null)
+        val email = sharedPreferences.getString("email","email")
+        authEmail = email.toString()
 
-        if (authEmail.isEmpty()){
-          startActivity(Intent(this,HomeActivity::class.java))
-        }else{
-            authEmail = auth.currentUser!!.email.toString()
-            authName = auth.currentUser!!.displayName.toString()
-            binding.emailTxt.setText(authEmail)
-            binding.emailTxt.isEnabled = false
-            binding.nameTxt.setText(authName)
-            binding.nameTxt.isEnabled = false
-        }
+//        if (authEmail==null){
+//          startActivity(Intent(this,HomeActivity::class.java))
+//        }else{
+//            authEmail = auth.currentUser!!.email.toString()
+//            authName = auth.currentUser!!.displayName.toString()
+//            binding.emailTxt.setText(authEmail)
+//            binding.emailTxt.isEnabled = false
+//            binding.nameTxt.setText(authName)
+//            binding.nameTxt.isEnabled = false
+//        }
 //        if(auth.currentUser != null){
 //            startActivity(Intent(this,HomeActivity::class.java))
 //        }else{
@@ -129,7 +135,7 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this,"Details added successfully",Toast.LENGTH_SHORT).show()
 //                intent.putExtra("username", binding.usernameTxt.text.toString())
 //                intent.putExtra("password", binding.passwordTxt.text.toString())
-                val intent = Intent(this,HomeActivity::class.java)
+                val intent = Intent(this,UserLoginActivity::class.java)
 //                FirebaseMessaging.getInstance().subscribeToTopic("tasks")
 
                 startActivity(intent)

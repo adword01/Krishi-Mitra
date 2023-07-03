@@ -90,95 +90,107 @@ class PredictCrop : Fragment() {
 
 
         binding.predictbtn.setOnClickListener {
+
+            showProgressBar()
             // getData()
 
-            val client = OkHttpClient.Builder()
-                .addInterceptor(HttpLoggingInterceptor().apply {
-                    level = HttpLoggingInterceptor.Level.BODY
-                })
-                .build()
+            if(binding.Nitrogen.text.isNullOrEmpty() || binding.Phosphorous.text.isNullOrEmpty() || binding.Potassium.text.isNullOrEmpty()|| binding.Temperature.text.isNullOrEmpty() || binding.Humidity.text.isNullOrEmpty() || binding.pH.text.isNullOrEmpty() || binding.rain.text.isNullOrEmpty()){
+                hideProgressBar()
+                Toast.makeText(requireContext(),"Fields are empty please fill to proceed",Toast.LENGTH_SHORT).show()
+            }
+            else{
 
-            val url = "https://krishimitra-0102.ue.r.appspot.com//predict"
-            val requestBody = FormBody.Builder()
-                .add("N", binding.Nitrogen.text.toString())
-                .add("P", binding.Phosphorous.text.toString())
-                .add("K", binding.Potassium.text.toString())
-                .add("temperature", binding.Temperature.text.toString())
-                .add("humidity", binding.Humidity.text.toString())
-                .add("ph", binding.pH.text.toString())
-                .add("rainfall", binding.rain.text.toString())
-                .build()
+                val client = OkHttpClient.Builder()
+                    .addInterceptor(HttpLoggingInterceptor().apply {
+                        level = HttpLoggingInterceptor.Level.BODY
+                    })
+                    .build()
+
+                val url = "https://krishimitra-0102.ue.r.appspot.com//predict"
+                val requestBody = FormBody.Builder()
+                    .add("N", binding.Nitrogen.text.toString())
+                    .add("P", binding.Phosphorous.text.toString())
+                    .add("K", binding.Potassium.text.toString())
+                    .add("temperature", binding.Temperature.text.toString())
+                    .add("humidity", binding.Humidity.text.toString())
+                    .add("ph", binding.pH.text.toString())
+                    .add("rainfall", binding.rain.text.toString())
+                    .build()
 
 
-            val request = Request.Builder()
-                .url(url)
-                .post(requestBody)
-                .build()
+                val request = Request.Builder()
+                    .url(url)
+                    .post(requestBody)
+                    .build()
 
 
-            GlobalScope.launch(Dispatchers.IO) {
-                try {
-                    val response = client.newCall(request).execute()
-                    val responseBody = response.body?.string()
-                    val jsonObject = JSONObject(responseBody!!)
-                    val cropName = jsonObject.getString("crop")
+                GlobalScope.launch(Dispatchers.IO) {
+                    try {
+                        val response = client.newCall(request).execute()
+                        val responseBody = response.body?.string()
+                        val jsonObject = JSONObject(responseBody!!)
+                        val cropName = jsonObject.getString("crop")
 
-                    requireActivity().runOnUiThread {
-                        Toast.makeText(activity, "Predicted crop: $cropName", Toast.LENGTH_SHORT)
-                            .show()
-                        dialog.show()
-                        showProgressBar()
-                        dialog.setCanceledOnTouchOutside(false)
-                        dialog.findViewById<TextView>(R.id.cropName).setText(cropName)
-                        val db = FirebaseDatabase.getInstance()
-                        db.reference.child("crops").child("English").get().addOnSuccessListener {
-                            if (it.exists()){
+                        requireActivity().runOnUiThread {
+                            Toast.makeText(activity, "Predicted crop: $cropName", Toast.LENGTH_SHORT)
+                                .show()
+                            dialog.show()
+                            dialog.setCanceledOnTouchOutside(false)
+                            dialog.findViewById<TextView>(R.id.cropName).setText(cropName)
+                            val db = FirebaseDatabase.getInstance()
+                            db.reference.child("crops").child("English").get().addOnSuccessListener {
+                                if (it.exists()){
 
-                                val cropdescription = it.child(cropName).value
+                                    val cropdescription = it.child(cropName).value
 
-                                val dbref = Firebase.firestore
-                                val userData = hashMapOf(
-                                    "Crop Name" to cropName,
-                                    "N" to  binding.Nitrogen.text.toString(),
-                                    "P" to  binding.Phosphorous.text.toString(),
-                                    "K" to binding.Potassium.text.toString(),
-                                    "temperature" to binding.Temperature.text.toString(),
-                                    "humidity" to binding.Humidity.text.toString(),
-                                    "ph" to binding.pH.text.toString(),
-                                    "rainfall" to binding.rain.text.toString()
-                                )
+                                    val dbref = Firebase.firestore
+                                    val userData = hashMapOf(
+                                        "cropName" to cropName,
+                                        "N" to  binding.Nitrogen.text.toString(),
+                                        "P" to  binding.Phosphorous.text.toString(),
+                                        "K" to binding.Potassium.text.toString(),
+                                        "temperature" to binding.Temperature.text.toString(),
+                                        "humidity" to binding.Humidity.text.toString(),
+                                        "ph" to binding.pH.text.toString(),
+                                        "rainfall" to binding.rain.text.toString()
+                                    )
 
-                                val docId = dbref.collection("cropsdata").document().id
+                                    val docId = dbref.collection("cropsdata").document().id
+                                    //  val db = FirebaseDatabase.getInstance().reference
+
+                                    dbref.collection("recent").document(authEmail).set(userData)
 
 //                                dbref.collection("cropsdata").collection(authEmail).document(docId).set(userData)
-                                dbref.collection("cropsdata").document(authEmail).collection("crops").document(docId).set(userData)
+                                    dbref.collection("cropsdata").document(authEmail).collection("crops").document(docId).set(userData)
 
 
-                                val storageRef = FirebaseStorage.getInstance().reference.child("$cropName.png")
+                                    val storageRef = FirebaseStorage.getInstance().reference.child("$cropName.png")
 
-                                storageRef.downloadUrl.addOnSuccessListener { uri ->
-                                    hideProgressBar()
-                                    Picasso.get().load(uri).into(dialog.findViewById<ImageView>(R.id.cropImg))
-                                    dialog.findViewById<TextView>(R.id.cropdescription).visibility = View.VISIBLE
-                                    dialog.findViewById<TextView>(R.id.cropdescription).setText(cropdescription.toString())
+                                    storageRef.downloadUrl.addOnSuccessListener { uri ->
+                                        hideProgressBar()
+                                        Picasso.get().load(uri).into(dialog.findViewById<ImageView>(R.id.cropImg))
+                                        dialog.findViewById<TextView>(R.id.cropdescription).visibility = View.VISIBLE
+                                        dialog.findViewById<TextView>(R.id.cropdescription).setText(cropdescription.toString())
 
 
-                                }.addOnFailureListener {
-                                    // Handle any errors here
-                                    hideProgressBar()
-                                    Toast.makeText(requireContext(),"Failed to load image",Toast.LENGTH_SHORT).show()
+                                    }.addOnFailureListener {
+                                        // Handle any errors here
+                                        hideProgressBar()
+                                        Toast.makeText(requireContext(),"Failed to load image",Toast.LENGTH_SHORT).show()
+                                    }
                                 }
                             }
                         }
-                    }
 
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                    requireActivity().runOnUiThread {
-                        Toast.makeText(activity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                        requireActivity().runOnUiThread {
+                            Toast.makeText(activity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
+
       }
         return binding.root
     }
